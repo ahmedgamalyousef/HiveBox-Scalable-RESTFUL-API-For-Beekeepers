@@ -9,6 +9,7 @@
        # source env/bin/activate   
 # Step 2 : Install Dependencies
        # pip install -r requirements.txt
+       # pip install Flask requests
 # Step 3 : Running Your Application
     1. # python app.py
     2. Access Your Application : Open your web browser and go to http://127.0.0.1:5000/version to see the version endpoint. You can also access the temperature endpoint at http://127.0.0.1:5000/temperature.
