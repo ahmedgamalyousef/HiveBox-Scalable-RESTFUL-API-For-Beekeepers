@@ -1,4 +1,5 @@
-# RESTful-API for Beekeepers is Under Construction
+# RESTFUL-API for Beekeepers is Under Construction
+
 # Step 1 : Set Up Your Project Environment
     1. Create a Project Directory:
        # mkdir hiveBox
