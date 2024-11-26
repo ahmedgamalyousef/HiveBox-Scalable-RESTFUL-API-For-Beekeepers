@@ -1,4 +1,3 @@
-<<<<<<< HEAD
 # RESTFUL-API for Beekeepers is Under Construction
 
 # Step 1 : Set Up Your Project Environment
@@ -49,4 +48,3 @@ Open your web browser and go to http://127.0.0.1:5000/version to see the version
        # docker login
     2. Push the Docker Image to Docker Hub:
        # docker push your-dockerhub-username/hivebox:latest
->>>>>>> f6c64b95b2e65b750521b635b92457eb4173b364
