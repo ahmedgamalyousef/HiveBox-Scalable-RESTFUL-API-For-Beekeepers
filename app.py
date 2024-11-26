@@ -1,39 +1,44 @@
 from flask import Flask, jsonify
 import requests
+from datetime import datetime, timedelta
+from prometheus_client import generate_latest, Gauge
 
 app = Flask(__name__)
+
+TEMPERATURE_GAUGE = Gauge('average_temperature', 'Average temperature of senseBox sensors')
 
 @app.route('/version', methods=['GET'])
 def version():
     return jsonify({'version': 'v0.0.1'})
 
+@app.route('/metrics', methods=['GET'])
+def metrics():
+    return generate_latest()
+
 @app.route('/temperature', methods=['GET'])
 def temperature():
-    senseBox_ids = ['5eba5fbad46fb8001b799787']
+    senseBox_ids = ['5eba5fbad46fb8001b799786', '5eba5fbad46fb8001b799787', '5eba5fbad46fb8001b799788']  # Add more IDs as needed
     temperatures = []
+    current_time = datetime.utcnow()
     for senseBox_id in senseBox_ids:
         response = requests.get(f'https://api.opensensemap.org/boxes/{senseBox_id}')
         if response.status_code == 200:
             data = response.json()
-            print(f"Data for senseBox ID {senseBox_id}: {data}")  # Print the entire data structure
-
-            # Check if 'sensors' key exists and print debugging information
-            if 'sensors' in data:
-                print(f"'sensors' key found in data for senseBox ID {senseBox_id}")
-                if len(data['sensors']) > 0:
-                    try:
-                        temperature = float(data['sensors'][0]['lastMeasurement']['value'])
+            if 'sensors' in data and len(data['sensors']) > 0:
+                try:
+                    last_measurement = data['sensors'][0]['lastMeasurement']
+                    measurement_time = datetime.strptime(last_measurement['createdAt'], '%Y-%m-%dT%H:%M:%S.%fZ')
+                    if current_time - measurement_time < timedelta(hours=1):
+                        temperature = float(last_measurement['value'])
                         temperatures.append(temperature)
-                    except KeyError as e:
-                        print(f"KeyError for senseBox ID {senseBox_id}: {e}")
-                else:
-                    print(f"No sensors found for senseBox ID {senseBox_id}")
-            else:
-                print(f"'sensors' key not found in data for senseBox ID {senseBox_id}")
+                except (KeyError, ValueError) as e:
+                    print(f"Error for senseBox ID {senseBox_id}: {e}")
         else:
             print(f"Failed to fetch data for senseBox ID {senseBox_id} with status code {response.status_code}")
     avg_temp = sum(temperatures) / len(temperatures) if temperatures else 0
-    return jsonify({'average_temperature': avg_temp})
+    TEMPERATURE_GAUGE.set(avg_temp)
+    status = 'Too Cold' if avg_temp < 10 else 'Good' if avg_temp <= 36 else 'Too Hot'
+    return jsonify({'average_temperature': avg_temp, 'status': status})
 
 if __name__ == '__main__':
-    app.run(host='0.0.0.0', port=5000, debug=True)
+   app.run(host='0.0.0.0', port=5000, debug=True)
