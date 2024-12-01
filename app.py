@@ -6,7 +6,9 @@ from prometheus_client import generate_latest, Gauge
 
 app = Flask(__name__)
 
-TEMPERATURE_GAUGE = Gauge('average_temperature', 'Average temperature of senseBox sensors')
+TEMPERATURE_GAUGE = Gauge('average_temperature', 
+                          'Average temperature of senseBox sensors'
+                          )
 
 # Get senseBox IDs from environment variables
 senseBox_ids = os.getenv('SENSEBOX_IDS', '').split(',')
@@ -27,7 +29,9 @@ def temperature():
     temperatures = []
     current_time = datetime.utcnow()
     for senseBox_id in senseBox_ids:
-        response = requests.get(f'https://api.opensensemap.org/boxes/{senseBox_id}')
+        response = requests.get(
+            f'https://api.opensensemap.org/boxes/{senseBox_id}'
+            )
         if response.status_code == 200:
             data = response.json()
             if 'sensors' in data and len(data['sensors']) > 0:
