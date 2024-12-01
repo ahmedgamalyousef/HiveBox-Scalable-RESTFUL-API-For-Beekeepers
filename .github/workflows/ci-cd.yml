@@ -44,7 +44,7 @@ jobs:
     needs: build
     services:
       docker:
-        image: my-flask-app:latest
+        image: ahmedgamalyousef/hivebox2:latest
         options: --privileged
         ports:
           - 5000:5000
