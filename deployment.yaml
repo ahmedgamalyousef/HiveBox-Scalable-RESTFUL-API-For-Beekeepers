@@ -1,0 +1,22 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: flask-app
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: flask-app
+  template:
+    metadata:
+      labels:
+        app: flask-app
+    spec:
+      containers:
+      - name: flask-app
+        image: my-flask-app:latest
+        env:
+        - name: SENSEBOX_IDS
+          value: "5eba5fbad46fb8001b799786,5eba5fbad46fb8001b799787,5eba5fbad46fb8001b799788"
+        ports:
+        - containerPort: 5000
