@@ -21,14 +21,14 @@ def metrics():
 @app.route('/temperature', methods=['GET'])
 def temperature():
     senseBox_ids = [
-        '5eba5fbad46fb8001b799786', 
-        '5eba5fbad46fb8001b799787', 
+        '5eba5fbad46fb8001b799786',
+        '5eba5fbad46fb8001b799787',
         '5eba5fbad46fb8001b799788'
     ]  # Add more IDs as needed
 
     temperatures = []
     current_time = datetime.utcnow()
-    
+
     for senseBox_id in senseBox_ids:
         response = requests.get(f'https://api.opensensemap.org/boxes/{senseBox_id}')
         if response.status_code == 200:
