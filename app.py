@@ -6,7 +6,7 @@ from prometheus_client import generate_latest, Gauge
 
 app = Flask(__name__)
 
-TEMPERATURE_GAUGE = Gauge('average_temperature', 
+TEMPERATURE_GAUGE = Gauge('average_temperature',
                           'Average temperature of senseBox sensors'
                           )
 
@@ -52,8 +52,10 @@ def temperature():
             )
     avg_temp = sum(temperatures) / len(temperatures) if temperatures else 0
     TEMPERATURE_GAUGE.set(avg_temp)
-    status = 'Too Cold' if avg_temp < 10 else 'Good' if avg_temp <= 36 else 'Too Hot'
-
+    status = 'Too Cold' if avg_temp < 10 else (
+    'Good' if avg_temp <= 36 else 'Too Hot'
+    )
+    
     return jsonify({
         'average_temperature': avg_temp,
         'status': status
