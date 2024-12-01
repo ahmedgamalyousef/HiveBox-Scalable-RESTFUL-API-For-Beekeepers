@@ -1,6 +1,5 @@
 # RESTFUL-API for Beekeepers is Under Construction
 As a DevOps Engineer, I successfully led the HiveBox project, which involved building a scalable RESTful API around openSenseMap to assist beekeepers with their chores . This project was part of the Dynamic DevOps Roadmap and covered various phases of the DevOps lifecycle .
-
 # Step 1 : Set Up Your Project Environment
     1. Create a Project Directory:
        # mkdir hiveBox
