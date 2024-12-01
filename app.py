@@ -3,7 +3,8 @@ import requests
 from datetime import datetime, timedelta
 from prometheus_client import generate_latest, Gauge
 app = Flask(__name__)
-TEMPERATURE_GAUGE = Gauge('average_temperature', 'Average temperature of senseBox sensors')
+TEMPERATURE_GAUGE = Gauge('average_temperature', 
+                          'Average temperature of senseBox sensors')
 @app.route('/version', methods=['GET'])
 def version():
     return jsonify({'version': 'v0.0.1'})
