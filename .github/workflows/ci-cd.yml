@@ -78,6 +78,14 @@ jobs:
     steps:
     - name: Checkout code
       uses: actions/checkout@v2
+    
+    - name: Install JDK 17
+      run: |
+        sudo apt-get update
+        sudo apt-get install -y openjdk-17-jdk
+        export JAVA_HOME=/usr/lib/jvm/java-17-openjdk-amd64
+        export PATH=$JAVA_HOME/bin:$PATH
+        java -version
 
     - name: Install SonarScanner
       run: |
