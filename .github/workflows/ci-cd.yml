@@ -62,6 +62,11 @@ jobs:
         python -m pip install --upgrade pip
         pip install -r requirements.txt
         pip install pytest
+    - name: Start Falsk App
+      run: nohup python app.py &
+
+    - name: wait for the server to start
+      run: sleep 10 
 
     - name: Run integration tests
       run: |
