@@ -23,6 +23,6 @@ def test_temperature():
     with app.test_client() as client:
         response = client.get('/temperature')
         assert response.status_code == 200
-        data = response.json()
+        data = response.get_json()  # Use get_json() method for Flask test client
         assert 'average_temperature' in data
         assert 'status' in data
