@@ -84,7 +84,8 @@ jobs:
         curl -sSLo sonar-scanner.zip https://binaries.sonarsource.com/Distribution/sonar-scanner-cli/sonar-scanner-cli-4.6.2.2472-linux.zip
         unzip sonar-scanner.zip
         export PATH=$PATH:$(pwd)/sonar-scanner-4.6.2.2472-linux/bin
-
+        # Verify installation
+        sonar-scanner --version
     - name: Run SonarQube Scan
       run: |
         sonar-scanner \
