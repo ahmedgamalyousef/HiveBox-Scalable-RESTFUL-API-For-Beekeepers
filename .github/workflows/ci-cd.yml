@@ -92,7 +92,7 @@ jobs:
 
     - name: Verify Java Version
       run: |
-        /usr/lib/jvm/java-17-openjdk-amd64/bin/java -version
+        /usr/lib/jvm/temurin-17-jdk-amd64/bin/java -version
 
     - name: Verify Java Version
       run: java -version
