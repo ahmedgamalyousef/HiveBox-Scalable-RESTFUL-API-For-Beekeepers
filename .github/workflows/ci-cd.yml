@@ -85,6 +85,15 @@ jobs:
         distribution: 'temurin'
         java-version: '17'
 
+    - name: Verify Java Installation
+      run: |
+        ls -l /usr/lib/jvm/
+        ls -l /usr/lib/jvm/java-17-openjdk-amd64/bin/
+
+    - name: Verify Java Version
+      run: |
+        /usr/lib/jvm/java-17-openjdk-amd64/bin/java -version
+
     - name: Verify Java Version
       run: java -version
      
