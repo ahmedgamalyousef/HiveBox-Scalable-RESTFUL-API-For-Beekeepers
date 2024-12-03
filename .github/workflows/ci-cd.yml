@@ -117,7 +117,7 @@ jobs:
       shell: bash
       env:
         JAVA_HOME: /usr/lib/jvm/temurin-17-jdk-amd64
-        PATH: /usr/lib/jvm/java-17-openjdk-amd64/bin:$PATH
+        PATH: $SONAR_SCANNER_HOME/bin:/usr/lib/jvm/temurin-17-jdk-amd64/bin:$SONAR_SCANNER_HOME/bin:$PATH
       run: |
         sonar-scanner \
         -Dsonar.projectKey=${{ secrets.SONAR_PROJECT_KEY }} \
