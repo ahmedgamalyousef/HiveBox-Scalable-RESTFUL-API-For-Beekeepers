@@ -112,10 +112,9 @@ jobs:
     - name: Run SonarQube Scan
       shell: sh
       env:
-        JAVA_HOME: /usr/lib/jvm/java-17-openjdk-amd64
+        JAVA_HOME: /usr/lib/jvm/temurin-17-jdk-amd64
         PATH: /usr/lib/jvm/java-17-openjdk-amd64/bin:$PATH
       run: |
-        /usr/lib/jvm/java-17-openjdk-amd64/bin/java -jar ./sonar-scanner-4.6.2.2472-linux/lib/sonar-scanner-cli-4.6.2.2472.jar \
         ./sonar-scanner-4.6.2.2472-linux/bin/sonar-scanner \
         -Dsonar.projectKey=${{ secrets.SONAR_PROJECT_KEY }} \
         -Dsonar.organization=${{ secrets.SONAR_ORGANIZATION }} \
