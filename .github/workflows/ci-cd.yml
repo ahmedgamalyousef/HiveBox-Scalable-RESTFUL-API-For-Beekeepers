@@ -82,8 +82,8 @@ jobs:
     - name: Ensure Shell Availability
       run: |
         sudo apt-get update 
-        sudo apt-get install -y dash
-        sudo ln -sfT dash /usr/bin/sh 
+        sudo apt-get install -y dash busybox
+        sudo ln -sfT /bin/dash /bin/sh 
 
     - name: Set up JDK 17
       uses: actions/setup-java@v2
@@ -112,14 +112,14 @@ jobs:
         echo "Adding SonarScanner to PATH..."
         echo 'export PATH=$PATH:'$(pwd)'/sonar-scanner-4.6.2.2472-linux/bin' >> $GITHUB_ENV
         source $GITHUB_ENV    
-        
+
     - name: Run SonarQube Scan
-      shell: bash
+      shell: /bin/bash
       env:
         JAVA_HOME: /usr/lib/jvm/temurin-17-jdk-amd64
         PATH: /usr/lib/jvm/java-17-openjdk-amd64/bin:$PATH
       run: |
-        ./sonar-scanner-4.6.2.2472-linux/bin/sonar-scanner \
+        /usr/bin/env bash ./sonar-scanner-4.6.2.2472-linux/bin/sonar-scanner \
         -Dsonar.projectKey=${{ secrets.SONAR_PROJECT_KEY }} \
         -Dsonar.organization=${{ secrets.SONAR_ORGANIZATION }} \
         -Dsonar.host.url=https://sonarcloud.io \
