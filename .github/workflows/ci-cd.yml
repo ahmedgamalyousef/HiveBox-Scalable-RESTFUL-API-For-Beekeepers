@@ -130,7 +130,8 @@ jobs:
       shell: /bin/bash
       env:
         JAVA_HOME: /usr/lib/jvm/temurin-17-jdk-amd64
-        PATH: $SONAR_SCANNER_HOME/bin:/usr/lib/jvm/temurin-17-jdk-amd64/bin:$SONAR_SCANNER_HOME/bin:$PATH
+        SONAR_SCANNER_HOME: /home/runner/work/HiveBox-Scalable-RESTful-API-for-Beekeepers/HiveBox-Scalable-RESTful-API-for-Beekeepers/sonar-scanner-4.6.2.2472-linux
+        PATH: $SONAR_SCANNER_HOME/bin:/usr/lib/jvm/temurin-17-jdk-amd64/bin:$PATH
       run: |
         sonar-scanner \
         -Dsonar.projectKey=${{ secrets.SONAR_PROJECT_KEY }} \
