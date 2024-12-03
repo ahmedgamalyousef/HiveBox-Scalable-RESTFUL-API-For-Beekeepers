@@ -98,7 +98,7 @@ jobs:
       run: java -version
      
     - name: Ensure Shell Availability
-      run: sudo apt-get update && sudo apt-get install -y dash 
+      run: sudo apt-get update && sudo apt-get install -y dash busybox
 
     - name: Install SonarScanner
       run: |
@@ -110,7 +110,7 @@ jobs:
         echo 'export PATH=$PATH:'$(pwd)'/sonar-scanner-4.6.2.2472-linux/bin' >> $GITHUB_ENV
 
     - name: Run SonarQube Scan
-      shell: sh
+      shell: /bin/bash
       env:
         JAVA_HOME: /usr/lib/jvm/temurin-17-jdk-amd64
         PATH: /usr/lib/jvm/java-17-openjdk-amd64/bin:$PATH
