@@ -105,15 +105,16 @@ jobs:
      
     - name: Install SonarScanner
       run: |
-        sudo apt-get update
+        sudo apt-get updatesudo apt-get update
         sudo apt-get install -y unzip
         curl -sSLo sonar-scanner.zip https://binaries.sonarsource.com/Distribution/sonar-scanner-cli/sonar-scanner-cli-4.6.2.2472-linux.zip
         unzip sonar-scanner.zip
-        echo "Adding SonarScanner to PATH..."
-        echo 'export PATH=$PATH:'$(pwd)'/sonar-scanner-4.6.2.2472-linux/bin' >> $GITHUB_ENV
-        source $GITHUB_ENV 
-        echo "SONAR_SCANNER_HOME=$SONAR_SCANNER_HOME" 
-        ls -l $SONAR_SCANNER_HOME/bin
+        export SONAR_SCANNER_HOME=$(pwd)/sonar-scanner-4.6.2.2472-linux
+        echo "SONAR_SCANNER_HOME=$SONAR_SCANNER_HOME" >> $GITHUB_ENV
+        echo "PATH=$SONAR_SCANNER_HOME/bin:\$PATH" >> $GITHUB_ENV
+        source $GITHUB_ENV  # Apply the environment variable
+        echo "SonarScanner home is set to: $SONAR_SCANNER_HOME"
+        ls -l $SONAR_SCANNER_HOME/bin  # Verify the sonar-scanner directory
     
     - name: Debug PATH
       run: |
@@ -123,7 +124,7 @@ jobs:
     
     - name: Verify SonarScanner Installation
       run: |
-          $SONAR_SCANNER_HOME/bin/sonar-scanner --version  # Verify SonarScanner is correctly installed
+          sonar-scanner --version  # Verify SonarScanner is correctly installed
     
     - name: Run SonarQube Scan
       shell: /bin/bash
@@ -131,7 +132,7 @@ jobs:
         JAVA_HOME: /usr/lib/jvm/temurin-17-jdk-amd64
         PATH: $SONAR_SCANNER_HOME/bin:/usr/lib/jvm/temurin-17-jdk-amd64/bin:$SONAR_SCANNER_HOME/bin:$PATH
       run: |
-        $SONAR_SCANNER_HOME/bin/sonar-scanner \
+        sonar-scanner \
         -Dsonar.projectKey=${{ secrets.SONAR_PROJECT_KEY }} \
         -Dsonar.organization=${{ secrets.SONAR_ORGANIZATION }} \
         -Dsonar.host.url=https://sonarcloud.io \
