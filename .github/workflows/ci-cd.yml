@@ -114,7 +114,7 @@ jobs:
         source $GITHUB_ENV    
 
     - name: Run SonarQube Scan
-      shell: /bin/bash
+      shell: bash
       env:
         JAVA_HOME: /usr/lib/jvm/temurin-17-jdk-amd64
         PATH: /usr/lib/jvm/java-17-openjdk-amd64/bin:$PATH
