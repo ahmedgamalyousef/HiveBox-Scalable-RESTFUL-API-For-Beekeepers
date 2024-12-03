@@ -122,9 +122,9 @@ jobs:
     #       which sonar-scanner
     #       ls -l $SONAR_SCANNER_HOME/bin      
     
-    - name: Verify SonarScanner Installation
-      run: |
-          sonar-scanner --version  # Verify SonarScanner is correctly installed
+    # - name: Verify SonarScanner Installation
+    #   run: |
+    #       sonar-scanner --version  # Verify SonarScanner is correctly installed
     
     - name: Run SonarQube Scan
       shell: /bin/bash
