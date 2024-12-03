@@ -111,7 +111,8 @@ jobs:
         unzip sonar-scanner.zip
         echo "Adding SonarScanner to PATH..."
         echo 'export PATH=$PATH:'$(pwd)'/sonar-scanner-4.6.2.2472-linux/bin' >> $GITHUB_ENV
-        source $GITHUB_ENV    
+        source $GITHUB_ENV  
+        ls -l $SONAR_SCANNER_HOME/bin  
 
     - name: Run SonarQube Scan
       shell: bash
