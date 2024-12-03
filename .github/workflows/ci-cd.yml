@@ -116,11 +116,11 @@ jobs:
         echo "SonarScanner home is set to: $SONAR_SCANNER_HOME"
         ls -l $SONAR_SCANNER_HOME/bin  # Verify the sonar-scanner directory
     
-    - name: Debug PATH
-      run: |
-          echo "Current PATH: $PATH"
-          which sonar-scanner
-          ls -l $SONAR_SCANNER_HOME/bin      
+    # - name: Debug PATH
+    #   run: |
+    #       echo "Current PATH: $PATH"
+    #       which sonar-scanner
+    #       ls -l $SONAR_SCANNER_HOME/bin      
     
     - name: Verify SonarScanner Installation
       run: |
