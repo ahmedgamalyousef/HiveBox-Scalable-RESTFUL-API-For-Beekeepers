@@ -148,7 +148,7 @@ jobs:
 
     - name: Install Terrascan
       run: |
-        curl -sSLo terrascan.tar.gz https://github.com/accurics/terrascan/releases/latest/download/terrascan_Linux_x86_64.tar.gz
+        curl -sSLo terrascan.tar.gz https://github.com/tenable/terrascan/releases/download/v1.12.0/terrascan_1.12.0_Linux_x86_64.tar.gz
         tar -xzvf terrascan.tar.gz
         sudo mv terrascan /usr/local/bin/
         terrascan --version
@@ -160,6 +160,7 @@ jobs:
         iac_type: "k8s"
         policy_type: "all"
         verbose: true
+
 
   push_image:
     runs-on: ubuntu-latest
