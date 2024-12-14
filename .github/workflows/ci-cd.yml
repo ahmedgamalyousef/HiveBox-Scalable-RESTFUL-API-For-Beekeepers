@@ -175,8 +175,10 @@ jobs:
         username: ${{ secrets.DOCKER_USERNAME }}
         password: ${{ secrets.DOCKER_PASSWORD }}
 
-    - name: Build and Push Docker image
+    - name: Build and Tag Docker image
       run: |
-        docker build -t ahmedgamalyousef/hivebox2:latest .
-        docker tag ahmedgamalyousef/hivebox2:latest ghcr.io/${{ github.repository }}/ahmedgamalyousef/hivebox2:latest
-        docker push ghcr.io/${{ github.repository }}/ahmedgamalyousef/hivebox2:latest
+          docker build -t ahmedgamalyousef/hivebox2:latest .
+          docker tag ahmedgamalyousef/hivebox2:latest ghcr.io/jemyousef/hivebox2:latest
+  
+    - name: Push Docker image
+      run: docker push ghcr.io/jemyousef/hivebox2:latest
