@@ -179,4 +179,4 @@ jobs:
       run: docker build -t ahmedgamalyousef/hivebox2:latest .
         
     - name: Push Docker Image
-      run: docker push ahmedgamalyousef/hivebox2:latest .
+      run: docker push ahmedgamalyousef/hivebox2:latest 
