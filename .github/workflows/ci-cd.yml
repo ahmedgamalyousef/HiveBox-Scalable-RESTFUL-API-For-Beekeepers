@@ -185,7 +185,7 @@ jobs:
         password: ${{ secrets.DOCKER_PASSWORD }}
 
     - name: Build Docker Image
-      run: docker build -t ahmedgamalyousef/HiveBox-Scalable-RESTFUL-API-for-Beekeepers:latest .
+      run: docker build -t ahmedgamalyousef/hivebox-scalable-restful-api-for-beekeepers:latest .
         
     - name: Push Docker Image
-      run: docker push ahmedgamalyousef/HiveBox-Scalable-RESTFUL-API-for-Beekeepers:latest 
+      run: docker push ahmedgamalyousef/hivebox-scalable-restful-api-for-beekeepers:latest 
