@@ -34,7 +34,7 @@ except redis.ConnectionError as e:
 
 # Initialize MinIO client
 minio_client = Minio(
-    'minio:9000', access_key='minioadmin', secret_key='minioadmin', 
+    'minio:9000', access_key='minioadmin', secret_key='minioadmin',
     secure=False
 )
 
@@ -78,7 +78,8 @@ def cache_temperature(senseBox_id, temperature):
     result = redis_client.set(
         senseBox_id, temperature, ex=300  # Cache for 5 minutes
     )
-    print(f"Cache result for senseBox ID {senseBox_id}: {result}")  # Debug print
+    # Debug print
+    print(f"Cache result for senseBox ID {senseBox_id}: {result}")
 
 
 @app.route('/version', methods=['GET'])
@@ -108,7 +109,7 @@ def temperature():
             continue
         try:
             response = requests.get(
-                f'https://api.opensensemap.org/boxes/{senseBox_id}', 
+                f'https://api.opensensemap.org/boxes/{senseBox_id}',
                 timeout=10
             )
             response.raise_for_status()
@@ -124,7 +125,8 @@ def temperature():
             if temperature_sensor:
                 last_measurement = temperature_sensor.get('lastMeasurement')
                 # Debug print
-                print(f"Last measurement for senseBox ID {senseBox_id}: {last_measurement}")
+                print(f"Last measurement for senseBox ID 
+                      {senseBox_id}: {last_measurement}")
                 if last_measurement and 'createdAt' in last_measurement:
                     measurement_time = datetime.strptime(
                         last_measurement['createdAt'], '%Y-%m-%dT%H:%M:%S.%fZ'
