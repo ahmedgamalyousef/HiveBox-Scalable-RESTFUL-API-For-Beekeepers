@@ -2,6 +2,7 @@ import requests
 from datetime import datetime, timedelta, timezone
 from prometheus_client import generate_latest, Gauge, Summary
 import redis
+
 from minio import Minio
 from apscheduler.schedulers.background import BackgroundScheduler
 import io
@@ -11,11 +12,11 @@ app = Flask(__name__)
 
 # Prometheus metrics
 TEMPERATURE_GAUGE = Gauge(
-    'average_temperature', 
+    'average_temperature',
     'Average temperature of senseBox sensors'
 )
 request_time = Summary(
-    'request_processing_seconds', 
+    'request_processing_seconds',
     'Time spent processing request'
 )
 
@@ -33,8 +34,10 @@ except redis.ConnectionError as e:
 
 # Initialize MinIO client
 minio_client = Minio(
-    'minio:9000', access_key='minioadmin', secret_key='minioadmin', secure=False
+    'minio:9000', access_key='minioadmin', secret_key='minioadmin', 
+    secure=False
 )
+
 
 # Function to store data in MinIO
 def store_data():
@@ -57,7 +60,7 @@ def store_data():
                     f"{senseBox_id}"
                 )
             except Exception as e:
-                print(f"Failed to store data for senseBox ID {senseBox_id}: {e}")
+                print(f"Failed to store data for senseBox ID{senseBox_id}:{e}")
         else:
             print(f"No data found in Redis for senseBox ID {senseBox_id}")
 
@@ -67,9 +70,11 @@ scheduler = BackgroundScheduler()
 scheduler.add_job(store_data, 'interval', minutes=5)
 scheduler.start()
 
+
 # Function to cache temperature data in Redis
 def cache_temperature(senseBox_id, temperature):
-    print(f"Caching temperature for senseBox ID {senseBox_id}: {temperature}")  # Debug print
+    # Debug print
+    print(f"Caching temperature for senseBox ID{senseBox_id}:{temperature}")
     result = redis_client.set(
         senseBox_id, temperature, ex=300  # Cache for 5 minutes
     )
@@ -101,7 +106,6 @@ def temperature():
             )  # Debug print
             temperatures.append(float(cached_temp))
             continue
-
         try:
             response = requests.get(
                 f'https://api.opensensemap.org/boxes/{senseBox_id}', 
@@ -119,12 +123,14 @@ def temperature():
             ), None)
             if temperature_sensor:
                 last_measurement = temperature_sensor.get('lastMeasurement')
-                print(f"Last measurement for senseBox ID {senseBox_id}: {last_measurement}")  # Debug print
+                # Debug print
+                print(f"Last measurement for senseBox ID {senseBox_id}: {last_measurement}")
                 if last_measurement and 'createdAt' in last_measurement:
                     measurement_time = datetime.strptime(
                         last_measurement['createdAt'], '%Y-%m-%dT%H:%M:%S.%fZ'
                     ).replace(tzinfo=timezone.utc)
-                    if current_time - measurement_time < timedelta(days=2):  # Adjusted recent threshold
+                    # Adjusted recent threshold
+                    if current_time - measurement_time < timedelta(days=2):
                         temperature = float(last_measurement['value'])
                         print(
                             f"Fetched temperature for senseBox ID {senseBox_id}: "
