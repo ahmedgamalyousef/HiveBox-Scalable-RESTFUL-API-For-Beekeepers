@@ -135,7 +135,7 @@ def temperature():
     avg_temp = sum(temperatures) / len(temperatures) if temperatures else 0
     print(f"Calculated average temperature: {avg_temp}")  # Debug print
     TEMPERATURE_GAUGE.set(avg_temp)
-    status is 'Too Cold' if avg_temp < 10 else ('Good' if avg_temp <= 36 else 'Too Hot')
+    status = 'Too Cold' if avg_temp < 10 else ('Good' if avg_temp <= 36 else 'Too Hot')
 
     return jsonify({'average_temperature': avg_temp, 'status': status})
 
