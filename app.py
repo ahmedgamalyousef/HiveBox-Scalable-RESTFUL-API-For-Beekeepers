@@ -4,19 +4,19 @@ from prometheus_client import generate_latest, Gauge, Summary
 import redis
 from minio import Minio
 from apscheduler.schedulers.background import BackgroundScheduler
-import io  # Import io module
+import io
 from flask import Flask, jsonify
 
 app = Flask(__name__)
 
 # Prometheus metrics
 TEMPERATURE_GAUGE = Gauge(
-    'average_temperature', 
+    'average_temperature',
     'Average temperature of senseBox sensors'
 )
-
 request_time = Summary(
-    'request_processing_seconds', 'Time spent processing request'
+    'request_processing_seconds',
+    'Time spent processing request'
 )
 
 # Set senseBox IDs directly in the code
@@ -49,7 +49,7 @@ def store_data():
             data_stream = io.BytesIO(data)  # Wrap bytes in a BytesIO object
             try:
                 minio_client.put_object(
-                    'mybucket', f"{senseBox_id}.json", data_stream, 
+                    'mybucket', f"{senseBox_id}.json", data_stream,
                     length=len(data), content_type='application/json'
                 )
                 print(
@@ -71,7 +71,9 @@ scheduler.start()
 # Function to cache temperature data in Redis
 def cache_temperature(senseBox_id, temperature):
     print(f"Caching temperature for senseBox ID {senseBox_id}: {temperature}")  # Debug print
-    result = redis_client.set(senseBox_id, temperature, ex=300)  # Cache for 5 minutes
+    result = redis_client.set(
+        senseBox_id, temperature, ex=300  # Cache for 5 minutes
+    )
     print(f"Cache result for senseBox ID {senseBox_id}: {result}")  # Debug print
 
 
@@ -95,7 +97,8 @@ def temperature():
         cached_temp = redis_client.get(senseBox_id)
         if cached_temp:
             print(
-                f"Found cached temperature for senseBox ID {senseBox_id}: {cached_temp.decode('utf-8')}"
+                f"Found cached temperature for senseBox ID {senseBox_id}: "
+                f"{cached_temp.decode('utf-8')}"
             )  # Debug print
             temperatures.append(float(cached_temp))
             continue
@@ -111,7 +114,8 @@ def temperature():
             )  # Debug print
 
             temperature_sensor = next((
-                sensor for sensor in data['sensors'] if sensor['title'].lower() == 'temperatur'
+                sensor for sensor in data['sensors']
+                if sensor['title'].lower() == 'temperatur'
             ), None)
             if temperature_sensor:
                 last_measurement = temperature_sensor.get('lastMeasurement')
@@ -122,7 +126,10 @@ def temperature():
                     ).replace(tzinfo=timezone.utc)
                     if current_time - measurement_time < timedelta(days=2):  # Adjusted recent threshold
                         temperature = float(last_measurement['value'])
-                        print(f"Fetched temperature for senseBox ID {senseBox_id}: {temperature}")  # Debug print
+                        print(
+                            f"Fetched temperature for senseBox ID {senseBox_id}: "
+                            f"{temperature}"
+                        )  # Debug print
                         temperatures.append(temperature)
                         cache_temperature(senseBox_id, temperature)
                     else:
@@ -137,9 +144,15 @@ def temperature():
     avg_temp = sum(temperatures) / len(temperatures) if temperatures else 0
     print(f"Calculated average temperature: {avg_temp}")  # Debug print
     TEMPERATURE_GAUGE.set(avg_temp)
-    status = 'Too Cold' if avg_temp < 10 else ('Good' if avg_temp <= 36 else 'Too Hot')
+    status = (
+        'Too Cold' if avg_temp < 10 else (
+            'Good' if avg_temp <= 36 else 'Too Hot'
+        )
+    )
 
-    return jsonify({'average_temperature': avg_temp, 'status': status})
+    return jsonify(
+        {'average_temperature': avg_temp, 'status': status}
+    )
 
 
 @app.route('/store', methods=['POST'])
