@@ -125,7 +125,7 @@ def temperature():
                 last_measurement = temperature_sensor.get('lastMeasurement')
                 # Debug print
                 print(
-                    f"Last measurement for senseBox ID {senseBox_id}: {last_measurement}"
+            f"Last measurement for senseBox ID {senseBox_id}: {last_measurement}"
                      )
 
                 if last_measurement and 'createdAt' in last_measurement:
@@ -136,19 +136,21 @@ def temperature():
                     if current_time - measurement_time < timedelta(days=2):
                         temperature = float(last_measurement['value'])
                         print(
-                            f"Fetched temperature for senseBox ID {senseBox_id}: "
+                f"Fetched temperature for senseBox ID {senseBox_id}: "
                             f"{temperature}"
                         )  # Debug print
                         temperatures.append(temperature)
                         cache_temperature(senseBox_id, temperature)
                     else:
-                        print(f"No recent measurement for senseBox ID {senseBox_id}")
+                     print(f"No recent measurement for senseBox ID{senseBox_id}")
                 else:
-                    print(f"No createdAt field in last measurement for senseBox ID {senseBox_id}")
+                 print(
+            f"No createdAt field in last measurement for senseBox ID {senseBox_id}"
+            )
             else:
                 print(f"No temperature sensor found for senseBox ID {senseBox_id}")
         except requests.exceptions.RequestException as e:
-            print(f"Failed to fetch data for senseBox ID {senseBox_id}: {e}")
+         print(f"Failed to fetch data for senseBox ID {senseBox_id}: {e}")
 
     avg_temp = sum(temperatures) / len(temperatures) if temperatures else 0
     print(f"Calculated average temperature: {avg_temp}")  # Debug print
