@@ -11,8 +11,10 @@ app = Flask(__name__)
 
 # Prometheus metrics
 TEMPERATURE_GAUGE = Gauge(
-    'average_temperature', 'Average temperature of senseBox sensors'
+    'average_temperature', 
+    'Average temperature of senseBox sensors'
 )
+
 request_time = Summary(
     'request_processing_seconds', 'Time spent processing request'
 )
