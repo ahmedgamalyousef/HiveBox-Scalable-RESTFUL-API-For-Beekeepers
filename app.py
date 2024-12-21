@@ -11,11 +11,11 @@ app = Flask(__name__)
 
 # Prometheus metrics
 TEMPERATURE_GAUGE = Gauge(
-    'average_temperature',
+    'average_temperature', 
     'Average temperature of senseBox sensors'
 )
 request_time = Summary(
-    'request_processing_seconds',
+    'request_processing_seconds', 
     'Time spent processing request'
 )
 
@@ -35,7 +35,6 @@ except redis.ConnectionError as e:
 minio_client = Minio(
     'minio:9000', access_key='minioadmin', secret_key='minioadmin', secure=False
 )
-
 
 # Function to store data in MinIO
 def store_data():
