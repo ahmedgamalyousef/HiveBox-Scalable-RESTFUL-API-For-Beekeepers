@@ -27,7 +27,7 @@ class TestApp(unittest.TestCase):
     def test_store(self):
         response = self.app.post('/store')
         self.assertEqual(response.status_code, 200)
-        self.assertEqual(response.json,{'status':'Data stored successfully'})
+        self.assertEqual(response.json, {'status': 'Data stored successfully'})
 
     def test_readyz(self):
         response = self.app.get('/readyz')
