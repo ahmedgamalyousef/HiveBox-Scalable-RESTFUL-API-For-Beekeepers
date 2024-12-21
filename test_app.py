@@ -15,13 +15,11 @@ class TestApp(unittest.TestCase):
     def test_metrics(self):
         response = self.app.get('/metrics')
         self.assertEqual(response.status_code, 200)
-        # Check for presence of Prometheus metrics in the response
         self.assertIn('average_temperature', response.data.decode())
 
     def test_temperature(self):
         response = self.app.get('/temperature')
         self.assertEqual(response.status_code, 200)
-        # Check for presence of temperature data in the response
         self.assertIn('average_temperature', response.json)
         self.assertIn('status', response.json)
 
