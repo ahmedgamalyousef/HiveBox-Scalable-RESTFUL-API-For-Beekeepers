@@ -153,7 +153,7 @@ def temperature():
 
             else:
                 print(
-                 f"No temperature sensor found for senseBox ID " 
+                 f"No temperature sensor found for senseBox ID "
                  f"{senseBox_id}")
         except requests.exceptions.RequestException as e:
             print(
