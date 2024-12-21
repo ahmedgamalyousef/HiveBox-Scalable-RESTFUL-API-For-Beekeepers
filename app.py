@@ -148,8 +148,9 @@ def temperature():
                         )
                 else:
                     print(
-                     f"No createdAt field in last measurement for senseBoxID
-                     {senseBox_id}")
+                     f"No createdAt field in last measurement for senseBox ID "
+                     f"{senseBox_id}")
+
             else:
                 print(
                  f"No temperature sensor found for senseBox ID 
