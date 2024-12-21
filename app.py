@@ -13,7 +13,9 @@ app = Flask(__name__)
 TEMPERATURE_GAUGE = Gauge(
     'average_temperature', 'Average temperature of senseBox sensors'
 )
-request_time = Summary('request_processing_seconds', 'Time spent processing request')
+request_time = Summary(
+    'request_processing_seconds', 'Time spent processing request'
+)
 
 # Set senseBox IDs directly in the code
 senseBox_ids = ['5eba5fbad46fb8001b799786']
@@ -53,10 +55,12 @@ def store_data():
         else:
             print(f"No data found in Redis for senseBox ID {senseBox_id}")
 
+
 # Scheduler to store data every 5 minutes
 scheduler = BackgroundScheduler()
 scheduler.add_job(store_data, 'interval', minutes=5)
 scheduler.start()
+
 
 # Function to cache temperature data in Redis
 def cache_temperature(senseBox_id, temperature):
@@ -64,14 +68,17 @@ def cache_temperature(senseBox_id, temperature):
     result = redis_client.set(senseBox_id, temperature, ex=300)  # Cache for 5 minutes
     print(f"Cache result for senseBox ID {senseBox_id}: {result}")  # Debug print
 
+
 @app.route('/version', methods=['GET'])
 def version():
     return jsonify({'version': 'v0.0.1'})
+
 
 @app.route('/metrics', methods=['GET'])
 @request_time.time()
 def metrics():
     return generate_latest()
+
 
 @app.route('/temperature', methods=['GET'])
 def temperature():
@@ -81,22 +88,30 @@ def temperature():
     for senseBox_id in senseBox_ids:
         cached_temp = redis_client.get(senseBox_id)
         if cached_temp:
-            print(f"Found cached temperature for senseBox ID {senseBox_id}: {cached_temp.decode('utf-8')}")  # Debug print
+            print(
+                f"Found cached temperature for senseBox ID {senseBox_id}: {cached_temp.decode('utf-8')}"
+            )  # Debug print
             temperatures.append(float(cached_temp))
             continue
 
         try:
-            response = requests.get(f'https://api.opensensemap.org/boxes/{senseBox_id}', timeout=10)
+            response = requests.get(
+                f'https://api.opensensemap.org/boxes/{senseBox_id}', timeout=10
+            )
             response.raise_for_status()
             data = response.json()
             print(f"Data for senseBox ID {senseBox_id}: {data}")  # Debug print
 
-            temperature_sensor = next((sensor for sensor in data['sensors'] if sensor['title'].lower() == 'temperatur'), None)
+            temperature_sensor = next((
+                sensor for sensor in data['sensors'] if sensor['title'].lower() == 'temperatur'
+            ), None)
             if temperature_sensor:
                 last_measurement = temperature_sensor.get('lastMeasurement')
                 print(f"Last measurement for senseBox ID {senseBox_id}: {last_measurement}")  # Debug print
                 if last_measurement and 'createdAt' in last_measurement:
-                    measurement_time = datetime.strptime(last_measurement['createdAt'], '%Y-%m-%dT%H:%M:%S.%fZ').replace(tzinfo=timezone.utc)
+                    measurement_time = datetime.strptime(
+                        last_measurement['createdAt'], '%Y-%m-%dT%H:%M:%S.%fZ'
+                    ).replace(tzinfo=timezone.utc)
                     if current_time - measurement_time < timedelta(days=2):  # Adjusted recent threshold
                         temperature = float(last_measurement['value'])
                         print(f"Fetched temperature for senseBox ID {senseBox_id}: {temperature}")  # Debug print
@@ -118,17 +133,24 @@ def temperature():
 
     return jsonify({'average_temperature': avg_temp, 'status': status})
 
+
 @app.route('/store', methods=['POST'])
 def store():
     store_data()
     return jsonify({'status': 'Data stored successfully'})
 
+
 @app.route('/readyz', methods=['GET'])
 def readyz():
-    inaccessible_count = sum(1 for senseBox_id in senseBox_ids if not redis_client.get(senseBox_id))
-    if inaccessible_count <= len(senseBox_ids) // 2 and all(redis_client.ttl(senseBox_id) > 0 for senseBox_id in senseBox_ids):
+    inaccessible_count = sum(
+        1 for senseBox_id in senseBox_ids if not redis_client.get(senseBox_id)
+    )
+    if inaccessible_count <= len(senseBox_ids) // 2 and all(
+        redis_client.ttl(senseBox_id) > 0 for senseBox_id in senseBox_ids
+    ):
         return jsonify({'status': 'Ready'}), 200
     return jsonify({'status': 'Not Ready'}), 503
+
 
 if __name__ == '__main__':
     app.run(host='0.0.0.0', port=5000, debug=True)
