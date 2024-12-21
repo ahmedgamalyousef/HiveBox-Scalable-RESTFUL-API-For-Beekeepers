@@ -1,5 +1,3 @@
-import os
-from flask import Flask, jsonify
 import requests
 from datetime import datetime, timedelta, timezone
 from prometheus_client import generate_latest, Gauge, Summary
@@ -7,11 +5,14 @@ import redis
 from minio import Minio
 from apscheduler.schedulers.background import BackgroundScheduler
 import io  # Import io module
+from flask import Flask, jsonify
 
 app = Flask(__name__)
 
 # Prometheus metrics
-TEMPERATURE_GAUGE = Gauge('average_temperature', 'Average temperature of senseBox sensors')
+TEMPERATURE_GAUGE = Gauge(
+    'average_temperature', 'Average temperature of senseBox sensors'
+)
 request_time = Summary('request_processing_seconds', 'Time spent processing request')
 
 # Set senseBox IDs directly in the code
@@ -27,7 +28,9 @@ except redis.ConnectionError as e:
     exit(1)
 
 # Initialize MinIO client
-minio_client = Minio('minio:9000', access_key='minioadmin', secret_key='minioadmin', secure=False)
+minio_client = Minio(
+    'minio:9000', access_key='minioadmin', secret_key='minioadmin', secure=False
+)
 
 # Function to store data in MinIO
 def store_data():
@@ -35,10 +38,15 @@ def store_data():
     for senseBox_id in senseBox_ids:
         data = redis_client.get(senseBox_id)
         if data:
-            print(f"Storing data for senseBox ID {senseBox_id}: {data.decode('utf-8')}")  # Debug print
+            print(
+                f"Storing data for senseBox ID {senseBox_id}: {data.decode('utf-8')}"
+            )  # Debug print
             data_stream = io.BytesIO(data)  # Wrap bytes in a BytesIO object
             try:
-                minio_client.put_object('mybucket', f"{senseBox_id}.json", data_stream, length=len(data), content_type='application/json')
+                minio_client.put_object(
+                    'mybucket', f"{senseBox_id}.json", data_stream, 
+                    length=len(data), content_type='application/json'
+                )
                 print(f"Successfully stored data for senseBox ID {senseBox_id}")
             except Exception as e:
                 print(f"Failed to store data for senseBox ID {senseBox_id}: {e}")
@@ -83,11 +91,6 @@ def temperature():
             data = response.json()
             print(f"Data for senseBox ID {senseBox_id}: {data}")  # Debug print
 
-            # Log all sensor data to see available data
-            for sensor in data['sensors']:
-                print(f"Sensor title: {sensor['title']}, last measurement: {sensor.get('lastMeasurement')}")  # Debug print
-
-            # Find the temperature sensor (case insensitive)
             temperature_sensor = next((sensor for sensor in data['sensors'] if sensor['title'].lower() == 'temperatur'), None)
             if temperature_sensor:
                 last_measurement = temperature_sensor.get('lastMeasurement')
@@ -123,8 +126,6 @@ def store():
 @app.route('/readyz', methods=['GET'])
 def readyz():
     inaccessible_count = sum(1 for senseBox_id in senseBox_ids if not redis_client.get(senseBox_id))
-    cache_expiry_time = datetime.now(timezone.utc) - timedelta(minutes=5)
-
     if inaccessible_count <= len(senseBox_ids) // 2 and all(redis_client.ttl(senseBox_id) > 0 for senseBox_id in senseBox_ids):
         return jsonify({'status': 'Ready'}), 200
     return jsonify({'status': 'Not Ready'}), 503
