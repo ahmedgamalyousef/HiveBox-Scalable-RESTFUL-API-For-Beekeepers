@@ -78,7 +78,8 @@ def cache_temperature(senseBox_id, temperature):
         # Cache for 5 minutes
         senseBox_id, temperature, ex=300
     )
-    print(f"Cache result for senseBox ID {senseBox_id}: {result}")  # Debug print
+    # Debug print
+    print(f"Cache result for senseBox ID {senseBox_id}: {result}")
 
 
 @app.route('/version', methods=['GET'])
@@ -136,18 +137,18 @@ def temperature():
                     if current_time - measurement_time < timedelta(days=2):
                         temperature = float(last_measurement['value'])
                         print(
-                            f"Fetched temperature for senseBox ID {senseBox_id}: "
-                            f"{temperature}"
+                        f"Fetched temperature for senseBox ID {senseBox_id}: "
+                        f"{temperature}"
                         )  # Debug print
                         temperatures.append(temperature)
                         cache_temperature(senseBox_id, temperature)
                     else:
                         print(
-                        f"No recent measurement for senseBox ID {senseBox_id}"
+                         f"No recent measurement for senseBox ID {senseBox_id}"
                         )
                 else:
                     print(
-                    f"No createdAt field in last measurement for senseBox ID {senseBox_id}"
+                     f"No createdAt field in last measurement for senseBoxID{senseBox_id}"
                     )
             else:
                 print(f"No temperature sensor found for senseBox ID {senseBox_id}")
