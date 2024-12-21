@@ -12,11 +12,11 @@ app = Flask(__name__)
 
 # Prometheus metrics
 TEMPERATURE_GAUGE = Gauge(
-    'average_temperature', 
+    'average_temperature',
     'Average temperature of senseBox sensors'
 )
 request_time = Summary(
-    'request_processing_seconds', 
+    'request_processing_seconds',
     'Time spent processing request'
 )
 
@@ -34,7 +34,8 @@ except redis.ConnectionError as e:
 
 # Initialize MinIO client
 minio_client = Minio(
-    'minio:9000', access_key='minioadmin', secret_key='minioadmin', secure=False
+'minio:9000', access_key='minioadmin', secret_key='minioadmin'
+, secure=False
 )
 
 
@@ -59,7 +60,8 @@ def store_data():
                     f"{senseBox_id}"
                 )
             except Exception as e:
-                print(f"Failed to store data for senseBox ID {senseBox_id}: {e}")
+                print(f"Failed to store data for senseBox ID 
+                      {senseBox_id}: {e}")
         else:
             print(f"No data found in Redis for senseBox ID {senseBox_id}")
 
@@ -72,11 +74,13 @@ scheduler.start()
 
 # Function to cache temperature data in Redis
 def cache_temperature(senseBox_id, temperature):
-    print(f"Caching temperature for senseBox ID {senseBox_id}: {temperature}")  # Debug print
+    print(f"Caching temperature for senseBox ID 
+          {senseBox_id}: {temperature}")  # Debug print
     result = redis_client.set(
         senseBox_id, temperature, ex=300  # Cache for 5 minutes
     )
-    print(f"Cache result for senseBox ID {senseBox_id}: {result}")  # Debug print
+    print(f"Cache result for senseBox ID 
+          {senseBox_id}: {result}")  # Debug print
 
 
 @app.route('/version', methods=['GET'])
@@ -122,7 +126,8 @@ def temperature():
             ), None)
             if temperature_sensor:
                 last_measurement = temperature_sensor.get('lastMeasurement')
-                print(f"Last measurement for senseBox ID {senseBox_id}: {last_measurement}")  # Debug print
+                print(f"Last measurement for senseBox ID 
+                      {senseBox_id}: {last_measurement}")  # Debug print
                 if last_measurement and 'createdAt' in last_measurement:
                     measurement_time = datetime.strptime(
                         last_measurement['createdAt'], '%Y-%m-%dT%H:%M:%S.%fZ'
@@ -138,7 +143,8 @@ def temperature():
                     else:
                         print(f"No recent measurement for senseBox ID {senseBox_id}")
                 else:
-                    print(f"No createdAt field in last measurement for senseBox ID {senseBox_id}")
+                    print(f"No createdAt field in last measurement for senseBox ID
+                           {senseBox_id}")
             else:
                 print(f"No temperature sensor found for senseBox ID {senseBox_id}")
         except requests.exceptions.RequestException as e:
