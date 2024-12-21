@@ -2,7 +2,6 @@ import requests
 from datetime import datetime, timedelta, timezone
 from prometheus_client import generate_latest, Gauge, Summary
 import redis
-
 from minio import Minio
 from apscheduler.schedulers.background import BackgroundScheduler
 import io
@@ -125,8 +124,10 @@ def temperature():
             if temperature_sensor:
                 last_measurement = temperature_sensor.get('lastMeasurement')
                 # Debug print
-                print(f"Last measurement for senseBox ID 
-                      {senseBox_id}: {last_measurement}")
+                print(
+                    f"Last measurement for senseBox ID {senseBox_id}: {last_measurement}"
+                     )
+
                 if last_measurement and 'createdAt' in last_measurement:
                     measurement_time = datetime.strptime(
                         last_measurement['createdAt'], '%Y-%m-%dT%H:%M:%S.%fZ'

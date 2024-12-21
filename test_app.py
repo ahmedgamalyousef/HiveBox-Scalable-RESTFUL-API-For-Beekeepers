@@ -1,6 +1,7 @@
 import unittest
 from app import app
 
+
 class TestApp(unittest.TestCase):
 
     def setUp(self):
@@ -32,6 +33,7 @@ class TestApp(unittest.TestCase):
         response = self.app.get('/readyz')
         self.assertIn(response.status_code, [200, 503])
         self.assertIn('status', response.json)
+
 
 if __name__ == '__main__':
     unittest.main()
