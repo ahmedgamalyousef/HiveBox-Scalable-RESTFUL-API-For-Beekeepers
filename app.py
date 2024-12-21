@@ -68,9 +68,9 @@ scheduler.start()
 
 # Function to cache temperature data in Redis
 def cache_temperature(senseBox_id, temperature):
-    print(f"Caching temperature for senseBox ID {senseBox_id}: {temperature}")  # Debug print
-    result = redis_client.set(senseBox_id, temperature, ex=300)  # Cache for 5 minutes
-    print(f"Cache result for senseBox ID {senseBox_id}: {result}")  # Debug print
+    print(f"Caching temperature for senseBox ID {senseBox_id}: {temperature}")# Debug print
+    result = redis_client.set(senseBox_id, temperature, ex=300)# Cache for 5 minutes
+    print(f"Cache result for senseBox ID {senseBox_id}: {result}")# Debug print
 
 
 @app.route('/version', methods=['GET'])
