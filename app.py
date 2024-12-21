@@ -36,6 +36,7 @@ minio_client = Minio(
     'minio:9000', access_key='minioadmin', secret_key='minioadmin', secure=False
 )
 
+
 # Function to store data in MinIO
 def store_data():
     print("Starting data storage...")
