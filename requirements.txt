@@ -6,6 +6,6 @@ prometheus_client==0.12.0
 requests
 redis
 minio
-pytest
+#pytest
 
 
