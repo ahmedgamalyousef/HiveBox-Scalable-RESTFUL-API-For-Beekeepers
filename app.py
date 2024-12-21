@@ -32,6 +32,7 @@ except redis.ConnectionError as e:
     print(f"Redis connection error: {e}")
     exit(1)
 
+
 # Initialize MinIO client
 minio_client = Minio(
 'minio:9000', access_key='minioadmin', secret_key='minioadmin'
@@ -60,8 +61,7 @@ def store_data():
                     f"{senseBox_id}"
                 )
             except Exception as e:
-                print(f"Failed to store data for senseBox ID 
-                      {senseBox_id}: {e}")
+                print(f"Failed to store data for senseBox ID{senseBox_id}:{e}")
         else:
             print(f"No data found in Redis for senseBox ID {senseBox_id}")
 
