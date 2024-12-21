@@ -33,10 +33,8 @@ except redis.ConnectionError as e:
 
 # Initialize MinIO client
 minio_client = Minio(
-    'minio:9000', access_key='minioadmin', secret_key='minioadmin',
-    secure=False
+    'minio:9000', access_key='minioadmin', secret_key='minioadmin', secure=False
 )
-
 
 # Function to store data in MinIO
 def store_data():
@@ -59,7 +57,7 @@ def store_data():
                     f"{senseBox_id}"
                 )
             except Exception as e:
-                print(f"Failed to store data for senseBox ID{senseBox_id}:{e}")
+                print(f"Failed to store data for senseBox ID {senseBox_id}: {e}")
         else:
             print(f"No data found in Redis for senseBox ID {senseBox_id}")
 
@@ -69,16 +67,15 @@ scheduler = BackgroundScheduler()
 scheduler.add_job(store_data, 'interval', minutes=5)
 scheduler.start()
 
-
 # Function to cache temperature data in Redis
 def cache_temperature(senseBox_id, temperature):
-    # Debug print
-    print(f"Caching temperature for senseBox ID{senseBox_id}:{temperature}")
+    print(
+        f"Caching temperature for senseBox ID {senseBox_id}: {temperature}"
+    )  # Debug print
     result = redis_client.set(
         senseBox_id, temperature, ex=300  # Cache for 5 minutes
     )
-    # Debug print
-    print(f"Cache result for senseBox ID {senseBox_id}: {result}")
+    print(f"Cache result for senseBox ID {senseBox_id}: {result}")  # Debug print
 
 
 @app.route('/version', methods=['GET'])
@@ -106,6 +103,7 @@ def temperature():
             )  # Debug print
             temperatures.append(float(cached_temp))
             continue
+
         try:
             response = requests.get(
                 f'https://api.opensensemap.org/boxes/{senseBox_id}',
@@ -123,35 +121,31 @@ def temperature():
             ), None)
             if temperature_sensor:
                 last_measurement = temperature_sensor.get('lastMeasurement')
-                # Debug print
                 print(
-        f"Last measurement for senseBox ID {senseBox_id}: {last_measurement}"
-                     )
-
+                    f"Last measurement for senseBox ID {senseBox_id}: {last_measurement}"
+                )  # Debug print
                 if last_measurement and 'createdAt' in last_measurement:
                     measurement_time = datetime.strptime(
                         last_measurement['createdAt'], '%Y-%m-%dT%H:%M:%S.%fZ'
                     ).replace(tzinfo=timezone.utc)
-                    # Adjusted recent threshold
-                    if current_time - measurement_time < timedelta(days=2):
+                    if current_time - measurement_time < timedelta(days=2):  # Adjusted recent threshold
                         temperature = float(last_measurement['value'])
                         print(
-                         f"Fetched temperature for senseBox ID {senseBox_id}: "
+                            f"Fetched temperature for senseBox ID {senseBox_id}: "
                             f"{temperature}"
-                        )  
-                        # Debug print
+                        )  # Debug print
                         temperatures.append(temperature)
                         cache_temperature(senseBox_id, temperature)
                     else:
-                     print(f"No recent measurement for senseBox ID{senseBox_id}")
+                        print(f"No recent measurement for senseBox ID {senseBox_id}")
                 else:
-                 print(
-            f"No createdAt field in last measurement for senseBox ID {senseBox_id}"
-            )
+                    print(
+                        f"No createdAt field in last measurement for senseBox ID {senseBox_id}"
+                    )
             else:
                 print(f"No temperature sensor found for senseBox ID {senseBox_id}")
         except requests.exceptions.RequestException as e:
-         print(f"Failed to fetch data for senseBox ID {senseBox_id}: {e}")
+            print(f"Failed to fetch data for senseBox ID {senseBox_id}: {e}")
 
     avg_temp = sum(temperatures) / len(temperatures) if temperatures else 0
     print(f"Calculated average temperature: {avg_temp}")  # Debug print
@@ -182,8 +176,7 @@ def readyz():
         redis_client.ttl(senseBox_id) > 0 for senseBox_id in senseBox_ids
     ):
         return jsonify({'status': 'Ready'}), 200
-    return jsonify(
-        {'status': 'Not Ready'}), 503
+    return jsonify({'status': 'Not Ready'}), 503
 
 
 if __name__ == '__main__':
