@@ -33,8 +33,9 @@ except redis.ConnectionError as e:
 
 # Initialize MinIO client
 minio_client = Minio(
-    'minio:9000', access_key='minioadmin', secret_key='minioadmin', secure=False
+   'minio:9000', access_key='minioadmin', secret_key='minioadmin', secure=False
 )
+
 
 # Function to store data in MinIO
 def store_data():
@@ -57,7 +58,7 @@ def store_data():
                     f"{senseBox_id}"
                 )
             except Exception as e:
-                print(f"Failed to store data for senseBox ID {senseBox_id}: {e}")
+                print(f"Failed to store data for senseBox ID{senseBox_id}:{e}")
         else:
             print(f"No data found in Redis for senseBox ID {senseBox_id}")
 
@@ -67,13 +68,15 @@ scheduler = BackgroundScheduler()
 scheduler.add_job(store_data, 'interval', minutes=5)
 scheduler.start()
 
+
 # Function to cache temperature data in Redis
 def cache_temperature(senseBox_id, temperature):
     print(
         f"Caching temperature for senseBox ID {senseBox_id}: {temperature}"
     )  # Debug print
     result = redis_client.set(
-        senseBox_id, temperature, ex=300  # Cache for 5 minutes
+        # Cache for 5 minutes
+        senseBox_id, temperature, ex=300
     )
     print(f"Cache result for senseBox ID {senseBox_id}: {result}")  # Debug print
 
@@ -129,7 +132,8 @@ def temperature():
                     measurement_time = datetime.strptime(
                         last_measurement['createdAt'], '%Y-%m-%dT%H:%M:%S.%fZ'
                     ).replace(tzinfo=timezone.utc)
-                    if current_time - measurement_time < timedelta(days=2):  # Adjusted recent threshold
+                    # Adjusted recent threshold
+                    if current_time - measurement_time < timedelta(days=2):
                         temperature = float(last_measurement['value'])
                         print(
                             f"Fetched temperature for senseBox ID {senseBox_id}: "
@@ -138,10 +142,12 @@ def temperature():
                         temperatures.append(temperature)
                         cache_temperature(senseBox_id, temperature)
                     else:
-                        print(f"No recent measurement for senseBox ID {senseBox_id}")
+                        print(
+                        f"No recent measurement for senseBox ID {senseBox_id}"
+                        )
                 else:
                     print(
-                        f"No createdAt field in last measurement for senseBox ID {senseBox_id}"
+                    f"No createdAt field in last measurement for senseBox ID {senseBox_id}"
                     )
             else:
                 print(f"No temperature sensor found for senseBox ID {senseBox_id}")
