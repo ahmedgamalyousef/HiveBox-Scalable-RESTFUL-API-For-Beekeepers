@@ -118,7 +118,7 @@ def temperature():
                     measurement_time = datetime.strptime(
                         last_measurement['createdAt'], '%Y-%m-%dT%H:%M:%S.%fZ'
                     ).replace(tzinfo=timezone.utc)
-                    if current time - measurement_time < timedelta(days=2):  # Adjusted recent threshold
+                    if current_time - measurement_time < timedelta(days=2):  # Adjusted recent threshold
                         temperature = float(last_measurement['value'])
                         print(f"Fetched temperature for senseBox ID {senseBox_id}: {temperature}")  # Debug print
                         temperatures.append(temperature)
@@ -148,10 +148,10 @@ def store():
 
 @app.route('/readyz', methods=['GET'])
 def readyz():
-    inaccessible count = sum(
+    inaccessible_count = sum(
         1 for senseBox_id in senseBox_ids if not redis_client.get(senseBox_id)
     )
-    if inaccessible count <= len(senseBox_ids) // 2 and all(
+    if inaccessible_count <= len(senseBox_ids) // 2 and all(
         redis_client.ttl(senseBox_id) > 0 for senseBox_id in senseBox_ids
     ):
         return jsonify({'status': 'Ready'}), 200
