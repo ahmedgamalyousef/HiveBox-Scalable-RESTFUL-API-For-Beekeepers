@@ -7,6 +7,7 @@ from apscheduler.schedulers.background import BackgroundScheduler
 import io
 from flask import Flask, jsonify
 
+
 app = Flask(__name__)
 
 # Prometheus metrics
@@ -33,7 +34,7 @@ except redis.ConnectionError as e:
 
 # Initialize MinIO client
 minio_client = Minio(
-    'minio:9000', access key='minioadmin', secret key='minioadmin', secure=False
+    'minio:9000', access_key='minioadmin', secret_key='minioadmin', secure=False
 )
 
 
