@@ -41,7 +41,8 @@ def store_data():
         data = redis_client.get(senseBox_id)
         if data:
             print(
-                f"Storing data for senseBox ID {senseBox_id}: {data.decode('utf-8')}"
+                f"Storing data for senseBox ID {senseBox_id}: "
+                f"{data.decode('utf-8')}"
             )  # Debug print
             data_stream = io.BytesIO(data)  # Wrap bytes in a BytesIO object
             try:
@@ -49,16 +50,21 @@ def store_data():
                     'mybucket', f"{senseBox_id}.json", data_stream, 
                     length=len(data), content_type='application/json'
                 )
-                print(f"Successfully stored data for senseBox ID {senseBox_id}")
+                print(
+                    f"Successfully stored data for senseBox ID "
+                    f"{senseBox_id}"
+                )
             except Exception as e:
                 print(f"Failed to store data for senseBox ID {senseBox_id}: {e}")
         else:
             print(f"No data found in Redis for senseBox ID {senseBox_id}")
 
+
 # Scheduler to store data every 5 minutes
 scheduler = BackgroundScheduler()
 scheduler.add_job(store_data, 'interval', minutes=5)
 scheduler.start()
+
 
 # Function to cache temperature data in Redis
 def cache_temperature(senseBox_id, temperature):
@@ -66,14 +72,17 @@ def cache_temperature(senseBox_id, temperature):
     result = redis_client.set(senseBox_id, temperature, ex=300)  # Cache for 5 minutes
     print(f"Cache result for senseBox ID {senseBox_id}: {result}")  # Debug print
 
+
 @app.route('/version', methods=['GET'])
 def version():
     return jsonify({'version': 'v0.0.1'})
+
 
 @app.route('/metrics', methods=['GET'])
 @request_time.time()
 def metrics():
     return generate_latest()
+
 
 @app.route('/temperature', methods=['GET'])
 def temperature():
@@ -128,10 +137,12 @@ def temperature():
 
     return jsonify({'average_temperature': avg_temp, 'status': status})
 
+
 @app.route('/store', methods=['POST'])
 def store():
     store_data()
     return jsonify({'status': 'Data stored successfully'})
+
 
 @app.route('/readyz', methods=['GET'])
 def readyz():
@@ -143,6 +154,7 @@ def readyz():
     ):
         return jsonify({'status': 'Ready'}), 200
     return jsonify({'status': 'Not Ready'}), 503
+
 
 if __name__ == '__main__':
     app.run(host='0.0.0.0', port=5000, debug=True)
