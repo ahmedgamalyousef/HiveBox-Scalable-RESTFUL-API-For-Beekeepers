@@ -34,6 +34,8 @@ except redis.ConnectionError as e:
 
 
 # Initialize MinIO client
+
+
 minio_client = Minio(
 'minio:9000', access_key='minioadmin', secret_key='minioadmin'
 , secure=False
@@ -74,8 +76,8 @@ scheduler.start()
 
 # Function to cache temperature data in Redis
 def cache_temperature(senseBox_id, temperature):
-    print(f"Caching temperature for senseBox ID 
-          {senseBox_id}: {temperature}")  # Debug print
+    # Debug print
+    print(f"Caching temperature for senseBox ID {senseBox_id}: {temperature}")  
     result = redis_client.set(
         senseBox_id, temperature, ex=300  # Cache for 5 minutes
     )
