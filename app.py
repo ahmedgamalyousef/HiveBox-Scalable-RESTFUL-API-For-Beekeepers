@@ -59,12 +59,10 @@ def store_data():
         else:
             print(f"No data found in Redis for senseBox ID {senseBox_id}")
 
-
 # Scheduler to store data every 5 minutes
 scheduler = BackgroundScheduler()
 scheduler.add_job(store_data, 'interval', minutes=5)
 scheduler.start()
-
 
 # Function to cache temperature data in Redis
 def cache_temperature(senseBox_id, temperature):
@@ -72,17 +70,14 @@ def cache_temperature(senseBox_id, temperature):
     result = redis_client.set(senseBox_id, temperature, ex=300)  # Cache for 5 minutes
     print(f"Cache result for senseBox ID {senseBox_id}: {result}")  # Debug print
 
-
 @app.route('/version', methods=['GET'])
 def version():
     return jsonify({'version': 'v0.0.1'})
-
 
 @app.route('/metrics', methods=['GET'])
 @request_time.time()
 def metrics():
     return generate_latest()
-
 
 @app.route('/temperature', methods=['GET'])
 def temperature():
@@ -107,7 +102,7 @@ def temperature():
             print(f"Data for senseBox ID {senseBox_id}: {data}")  # Debug print
 
             temperature_sensor = next((
-                sensor for sensor in data['sensors'] if sensor['title'].lower() == 'temperatur'
+                sensor for sensor in data['sensors'] if sensor['title'].lower() == 'temperature'
             ), None)
             if temperature_sensor:
                 last_measurement = temperature_sensor.get('lastMeasurement')
