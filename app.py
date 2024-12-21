@@ -106,7 +106,8 @@ def temperature():
 
         try:
             response = requests.get(
-                f'https://api.opensensemap.org/boxes/{senseBox_id}', timeout=10
+                f'https://api.opensensemap.org/boxes/{senseBox_id}', 
+                timeout=10
             )
             response.raise_for_status()
             data = response.json()
@@ -171,7 +172,8 @@ def readyz():
         redis_client.ttl(senseBox_id) > 0 for senseBox_id in senseBox_ids
     ):
         return jsonify({'status': 'Ready'}), 200
-    return jsonify({'status': 'Not Ready'}), 503
+    return jsonify(
+        {'status': 'Not Ready'}), 503
 
 
 if __name__ == '__main__':
