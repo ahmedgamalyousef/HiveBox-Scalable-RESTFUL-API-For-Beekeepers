@@ -47,18 +47,19 @@ Each phase builds on the previous one, gradually covering all aspects of the Dev
        # source env/bin/activate   
 # Step 2 : Install Dependencies
        # pip install -r requirements.txt
-       # pip install Flask requests
 # Step 3 : Running Your Application
     1. # python app.py
-    2. Access Your Application : 
-Open your web browser and go to http://127.0.0.1:5000/version to see the version endpoint . You can also access the temperature endpoint at http://127.0.0.1:5000/temperature.
+    2. Access Your Application : Open Your Browser
+      - http://127.0.0.1:5000/version to see the version endpoint .
+      - http://127.0.0.1:5000/temperature to see the temperature endpoint .
+      - http://127.0.0.1:5000/metrics to returns default Prometheus metrics about the app .
+      - http://127.0.0.1:5000/readyz to return HTTP 200 unless 50% + 1 of the configured senseBoxes are not accessible and caching content is older than 5 min .
+      - http://127.0.0.1:5000/store to make the application store the data every 5 minutes, but by calling this endpoint, it should store the data directly on MinIO .      
 # Step 4 : Dockerizing the Application
-    1. # docker build -t your-dockerhub-username/hivebox:latest .
-    2. # docker run -p 5000:5000 your-dockerhub-username/hivebox:latest
+    1. # docker build -t your-dockerhub-username/hiveBox-scalable-sESTful-api-for-beekeepers:latest .
+    2. # docker run -p 5000:5000 your-dockerhub-username/hiveBox-scalable-sESTful-api-for-beekeepers::latest
 # Step 5 : Push Docker Image to Docker Hub
     1. Log In to Docker Hub:
        # docker login
     2. Push the Docker Image to Docker Hub:
-       # docker push your-dockerhub-username/hivebox:latest
-
- 
+       # docker push your-dockerhub-username/hiveBox-scalable-sESTful-api-for-beekeepers::latest

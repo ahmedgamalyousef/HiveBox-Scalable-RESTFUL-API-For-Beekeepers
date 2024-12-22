@@ -9,4 +9,3 @@ minio
 apscheduler
 pytest
 
-
