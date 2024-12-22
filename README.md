@@ -5,7 +5,7 @@
 
 ## Description
 As a DevOps Engineer, I successfully led the HiveBox project, which involved building a scalable RESTful API around openSenseMap to assist beekeepers with their chores . This project was part of the Dynamic DevOps Roadmap and covered various phases of the DevOps lifecycle .
-# Project Phases :
+## Project Phases 
 # Phase 1 : Welcome to the DevOps World
     • Understand Your Role: Learn about your role in the project and how you'll collaborate with other teams .
     • Agile Methodology: Brush up on agile project management and decide which Agile methodology you'll use .
@@ -35,9 +35,9 @@ As a DevOps Engineer, I successfully led the HiveBox project, which involved bui
     • Integration Tests: Write integration tests .
     • Infrastructure as Code: Learn Terraform essentials and Kubernetes configuration management (Helm) .
     • Continuous Delivery Best Practices: Implement CD best practices .
-# Summary
+## Summary
 Each phase builds on the previous one, gradually covering all aspects of the DevOps lifecycle, from planning and coding to testing, continuous integration, continuous delivery, and infrastructure . The goal is to learn industry best practices while implementing a real system .
-# Running Project :
+## Running Project 
 # Step 1 : Set Up Your Project Environment
     1. Create a Project Directory:
        # mkdir hiveBox
@@ -57,9 +57,9 @@ Each phase builds on the previous one, gradually covering all aspects of the Dev
       - http://127.0.0.1:5000/store to make the application store the data every 5 minutes, but by calling this endpoint, it should store the data directly on MinIO .      
 # Step 4 : Dockerizing the Application
     1. # docker build -t your-dockerhub-username/hiveBox-scalable-sESTful-api-for-beekeepers:latest .
-    2. # docker run -p 5000:5000 your-dockerhub-username/hiveBox-scalable-sESTful-api-for-beekeepers::latest
+    2. # docker run -p 5000:5000 your-dockerhub-username/hiveBox-scalable-sESTful-api-for-beekeepers:latest
 # Step 5 : Push Docker Image to Docker Hub
     1. Log In to Docker Hub:
        # docker login
     2. Push the Docker Image to Docker Hub:
-       # docker push your-dockerhub-username/hiveBox-scalable-sESTful-api-for-beekeepers::latest
+       # docker push your-dockerhub-username/hiveBox-scalable-sESTful-api-for-beekeepers:latest
