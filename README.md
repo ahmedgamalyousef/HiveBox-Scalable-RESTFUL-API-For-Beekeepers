@@ -1,16 +1,16 @@
 
-# End-to-End Project : HiveBox ( Under Construction )
+# End-to-End Project : HiveBox ( Loading .... )
 
 ![Project Logo](https://github.com/JemyYousef/HiveBox-Scalable-RESTful-API-for-Beekeepers/blob/main/assets/hivebox.jpg)
 
 ## Description
-As a DevOps Engineer, I successfully led the HiveBox project, which involved building a scalable RESTful API around openSenseMap to assist beekeepers with their chores . This project was part of the Dynamic DevOps Roadmap and covered various phases of the DevOps lifecycle .
+As a DevOps Engineer, I successfully led the HiveBox project, which involved building a scalable RESTFUL API around openSenseMap to assist Beekeepers with their chores . This project was part of the Dynamic DevOps Roadmap and covered various phases of the DevOps lifecycle .
 
 ## Project Phases 
 
 ### Phase 1 : Welcome to the DevOps World
     • Understand Your Role: Learn about your role in the project and how you'll collaborate with other teams .
-    • Agile Methodology: Brush up on agile project management and decide which Agile methodology you'll use .
+    • Agile Methodology: Brush up on agile project management and decide which Agile methodology you'll use (e.g., Scrum, Kanban) .
     • Documentation: Document your progress and decisions as you go .
 ### Phase 2 : Basics - DevOps Core
     • Python Fundamentals: Learn Python basics .
