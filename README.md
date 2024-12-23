@@ -37,6 +37,11 @@ As a DevOps Engineer, I successfully led the HiveBox project, which involved bui
     • Integration Tests: Write integration tests .
     • Infrastructure as Code: Learn Terraform essentials and Kubernetes configuration management (Helm) .
     • Continuous Delivery Best Practices: Implement CD best practices .
+### Phase 6 : Optimize - Keep Improving
+    • Deploy the Application in Declarative GitOps Style Using Argo CD .
+    • Prepare for Production by Setting Up DNS (ExternalDNS) and Certificates (Cert-Manager) .
+    • Automate Dependency Updates with Dependabot .
+    • Move All External Services to Kubernetes Cluster Using Open-Source Solutions .
 
 ### Summary
 
