@@ -67,10 +67,10 @@ Each phase builds on the previous one, gradually covering all aspects of the Dev
       - http://127.0.0.1:5000/readyz to return HTTP 200 unless 50% + 1 of the configured senseBoxes are not accessible and caching content is older than 5 min .
       - http://127.0.0.1:5000/store to make the application store the data every 5 minutes, but by calling this endpoint, it should store the data directly on MinIO .      
 ### Step 4 : Dockerizing the Application
-    1. # docker build -t your-dockerhub-username/hiveBox-scalable-sESTful-api-for-beekeepers:latest .
-    2. # docker run -p 5000:5000 your-dockerhub-username/hiveBox-scalable-sESTful-api-for-beekeepers:latest
+    1. # docker build -t your-dockerhub-username/hiveBox-scalable-RESTful-api-for-beekeepers:latest .
+    2. # docker run -p 5000:5000 your-dockerhub-username/hiveBox-scalable-RESTful-api-for-beekeepers:latest
 ### Step 5 : Push Docker Image to Docker Hub
     1. Log In to Docker Hub:
        # docker login
     2. Push the Docker Image to Docker Hub:
-       # docker push your-dockerhub-username/hiveBox-scalable-sESTful-api-for-beekeepers:latest
+       # docker push your-dockerhub-username/hiveBox-scalable-RESTful-api-for-beekeepers:latest
