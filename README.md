@@ -1,5 +1,5 @@
 
-# End-to-End Project : HiveBox ( Loading .... )
+# End-to-End Project : HiveBox 
 
 ![Project Logo](https://github.com/JemyYousef/HiveBox-Scalable-RESTful-API-for-Beekeepers/blob/main/assets/hivebox.jpg)
 
