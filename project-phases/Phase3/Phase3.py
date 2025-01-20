@@ -32,8 +32,9 @@ def get_temperature():
                        ]
         valid_temperatures = [temp for temp in temperatures if temp is not None]
         avg_temperature = sum(valid_temperatures) / len(valid_temperatures) 
-        if valid_temperatures 
+        if valid_temperatures
         else 0
+
         sensebox_data = {
             "timestamp": datetime.utcnow(),
             "avg_temperature": avg_temperature
