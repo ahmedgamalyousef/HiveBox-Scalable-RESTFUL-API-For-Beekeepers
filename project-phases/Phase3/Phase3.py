@@ -1,14 +1,16 @@
-from datetime import datetime, timedelta, timezone
+from datetime import datetime, timedelta
 from fastapi import FastAPI, HTTPException
 import requests
 
 app = FastAPI()
 version = "v0.0.1"
 
+
 # Endpoint to return app version
 @app.get("/version")
 def get_version():
     return {"version": version}
+
 
 # Endpoint to return current average temperature based on senseBox data
 @app.get("/temperature")
@@ -16,14 +18,12 @@ def get_temperature():
     global sensebox_data
 
     # Fetch new data if last data is older than 1 hour
-    if (not sensebox_data or 
+    if (not sensebox_data or
       (datetime.utcnow() - sensebox_data.get("timestamp", datetime.min)) >
       timedelta(hours=1)):
         response = requests.get("https://api.opensensemap.org/boxes/data")
- 
         if response.status_code != 200:
             raise HTTPException(status_code=500, detail="Failed to fetch senseBox data")
-
         data = response.json()
         temperatures = [
         box["sensors"][0]["lastMeasurement"] if "sensors" in box and 
