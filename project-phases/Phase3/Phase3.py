@@ -20,7 +20,7 @@ def get_temperature():
     # Fetch new data if last data is older than 1 hour
     if (not sensebox_data or
         (datetime.utcnow() - sensebox_data.get("timestamp", datetime.min)) >
-        timedelta(hours=1)):
+            timedelta(hours=1)):
         response = requests.get("https://api.opensensemap.org/boxes/data")
         if (response.status_code != 200):
             raise HTTPException(
