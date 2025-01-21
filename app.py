@@ -121,7 +121,7 @@ def temperature():
 
             temperature_sensor = next((
                 sensor for sensor in data['sensors']
-                if sensor['title'].lower() == 'temperatur'
+                if sensor['title'].lower() == 'temperature'
             ), None)
             if temperature_sensor:
                 last_measurement = temperature_sensor.get('lastMeasurement')
