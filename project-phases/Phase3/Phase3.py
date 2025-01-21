@@ -29,11 +29,13 @@ def get_temperature():
             )
         data = response.json()
         temperatures = [
-        box["sensors"][0]["lastMeasurement"] if "sensors" in box and 
-        box["sensors"][0]["type"] == "temperature" else None
-        for box in data if box
+             box["sensors"][0]["lastMeasurement"] if "sensors" in box and 
+            box["sensors"][0]["type"] == "temperature" else None
+            for box in data if box
         ]
-        valid_temperatures = [temp for temp in temperatures if temp is not None]
+        valid_temperatures = [
+            temp for temp in temperatures if temp is not None
+        ]
         avg_temperature = (
             sum(valid_temperatures) / len(valid_temperatures)
             if valid_temperatures
