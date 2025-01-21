@@ -19,7 +19,7 @@
     1. # python app.py
     2. Access Your Application : Open Your Browser
       - http://127.0.0.1:5000/version to see the version endpoint .
-      - http://127.0.0.1:5000/temperature to see the temperature endpoint ( < 10 : Too Cold , Between 11-36 : Good , > 37 : Too Hot  .
+      - http://127.0.0.1:5000/temperature to see the temperature endpoint ( < 10 : Too Cold , Between 11-36 : Good , > 37 : Too Hot ) .
       - http://127.0.0.1:5000/metrics to returns default Prometheus metrics about the app .
 
 ### Step 3 : Dockerizing the Application
