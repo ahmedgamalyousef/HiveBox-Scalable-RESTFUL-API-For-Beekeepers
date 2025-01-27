@@ -32,9 +32,10 @@ def metrics():
     return Response(generate_latest(), mimetype="text/plain")
 
 
-# Example function to get temperature reading (replace with actual implementation)
+# function to get temperature reading 
 def get_temperature_reading():
     return 25  # Placeholder value
+
 
 if __name__ == '__main__':
     start_http_server(8000)
@@ -55,3 +56,4 @@ def test_metrics_endpoint():
 if __name__ == '__main__':
     test_temperature_endpoint()
     test_metrics_endpoint()
+
