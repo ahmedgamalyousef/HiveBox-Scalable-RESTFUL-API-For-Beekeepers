@@ -32,7 +32,7 @@ def metrics():
     return Response(generate_latest(), mimetype="text/plain")
 
 
-# function to get temperature reading 
+# function to get temperature reading
 def get_temperature_reading():
     return 25  # Placeholder value
 
@@ -52,8 +52,8 @@ def test_metrics_endpoint():
     response = app.test_client().get('/metrics')
     assert response.status_code == 200
 
+
 # Run tests
 if __name__ == '__main__':
     test_temperature_endpoint()
     test_metrics_endpoint()
-
