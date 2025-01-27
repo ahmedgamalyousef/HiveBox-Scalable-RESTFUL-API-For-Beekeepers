@@ -15,7 +15,7 @@
        # mkdir Phase3
        # cd Phase3  
 ### Step 2 : Running Your Application
-    1. # python Phase3.py
+    1. # python app.py
     2. Access Your Application : Open Your Browser
       - http://127.0.0.1:5000/version to see the version endpoint .
       - http://127.0.0.1:5000/temperature to see the temperature endpoint ( the data is no older 1 hour ) .

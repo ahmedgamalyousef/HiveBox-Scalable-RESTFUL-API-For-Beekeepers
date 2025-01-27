@@ -15,13 +15,33 @@
     1. Create a Project Directory:
        # mkdir Phase4
        # cd Phase4  
-### Step 2 : Running Your Application
+    2. Install Docker & Kind & Kubectl
+
+### Step 2 : Create KIND Cluster
+       # kind create cluster --config clustername.yaml
+
+### Step 3 : Prepare Deployment and Service files
+    1. Create Deployment File ( Deployment.yaml )
+    2. Create Service File ( Service.yaml )
+
+### Step 4 : Apply Deployment and Service
+    1. Apply Deployment and Service files
+       # kubectl apply -f deployment.yaml
+       # kubectl apply -f service.yaml
+    2. verify Deployment
+       # kubectl get deployments
+       # kubectl get pods
+    3. Verify Service
+       # kubectl get services
+       # kubectl describre service 
+
+### Step 5 : Running and Accessing Your Application
     1. # python app.py
     2. Access Your Application : Open Your Browser
       - http://127.0.0.1:5000/version to see the version endpoint .
       - http://127.0.0.1:5000/temperature to see the temperature endpoint ( < 10 : Too Cold , Between 11-36 : Good , > 37 : Too Hot ) .
       - http://127.0.0.1:5000/metrics to returns default Prometheus metrics about the app .
 
-### Step 3 : Dockerizing the Application
+### Step 6 : Dockerizing the Application
     1. # docker build -t phase4:latest .
     2. # docker run --rm phase4:latest
