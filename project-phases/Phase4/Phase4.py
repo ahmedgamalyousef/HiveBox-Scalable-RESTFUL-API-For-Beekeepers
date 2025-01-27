@@ -12,6 +12,7 @@ if sensebox_id is None:
 # Prometheus metrics
 app_metric = Gauge('app_metric', 'Description')
 
+
 # Temperature endpoint
 @app.route('/temperature', methods=['GET'])
 def temperature():
@@ -24,10 +25,12 @@ def temperature():
         status = "Too Hot"
     return jsonify({"temperature": temp, "status": status})
 
+
 # Metrics endpoint
 @app.route('/metrics', methods=['GET'])
 def metrics():
     return Response(generate_latest(), mimetype="text/plain")
+
 
 # Example function to get temperature reading (replace with actual implementation)
 def get_temperature_reading():
@@ -37,10 +40,12 @@ if __name__ == '__main__':
     start_http_server(8000)
     app.run(host='0.0.0.0', port=5000)
 
+
 # Basic integration test example
 def test_temperature_endpoint():
     response = app.test_client().get('/temperature')
     assert response.status_code == 200
+
 
 def test_metrics_endpoint():
     response = app.test_client().get('/metrics')
