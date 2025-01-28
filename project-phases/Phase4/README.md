@@ -36,7 +36,6 @@
        # kubectl describre service 
 
 ### Step 5 : Running and Accessing Your Application
-    1. # export 
     1. # python Phase4.py
     2. Access Your Application : Open Your Browser
       - http://127.0.0.1:5000/version to see the version endpoint .
