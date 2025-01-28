@@ -36,7 +36,8 @@
        # kubectl describre service 
 
 ### Step 5 : Running and Accessing Your Application
-    1. # python app.py
+    1. # export 
+    1. # python Phase4.py
     2. Access Your Application : Open Your Browser
       - http://127.0.0.1:5000/version to see the version endpoint .
       - http://127.0.0.1:5000/temperature to see the temperature endpoint ( < 10 : Too Cold , Between 11-36 : Good , > 37 : Too Hot ) .
