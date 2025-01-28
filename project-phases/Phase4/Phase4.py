@@ -5,7 +5,7 @@ from prometheus_client import start_http_server, Gauge, generate_latest
 app = Flask(__name__)
 version = " v0.0.1 "
 # Set SENSEBOX_ID from environment variable
-SENSEBOX_ID="5eba5fbad46fb8001b799786"
+SENSEBOX_ID = "5eba5fbad46fb8001b799786"
 sensebox_id = os.getenv("SENSEBOX_ID")
 if sensebox_id is None:
     raise ValueError("SENSEBOX_ID environment variable is not set")
