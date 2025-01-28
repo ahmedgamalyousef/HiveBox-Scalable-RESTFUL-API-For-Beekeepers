@@ -15,8 +15,8 @@
     1. Create a Project Directory:
        # mkdir Phase4
        # cd Phase4  
-    2. Install Docker & Kind & Kubectl
-
+    2. Install Docker, Kind & Kubectl
+       # pip install docker kind kubectl
 ### Step 2 : Create KIND Cluster
        # kind create cluster --config clustername.yaml
 
