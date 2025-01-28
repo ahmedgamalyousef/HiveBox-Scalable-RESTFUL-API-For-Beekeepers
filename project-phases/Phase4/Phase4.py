@@ -3,7 +3,7 @@ from flask import Flask, jsonify, Response
 from prometheus_client import start_http_server, Gauge, generate_latest
 
 app = Flask(__name__)
-
+version = " v0.0.1 "
 # Set SENSEBOX_ID from environment variable
 sensebox_id = os.getenv("SENSEBOX_ID")
 if sensebox_id is None:
@@ -13,8 +13,14 @@ if sensebox_id is None:
 app_metric = Gauge('app_metric', 'Description')
 
 
+# Version endpoint
+@app.get("/version")
+def get_version():
+    return {"version": version}
+
+
 # Temperature endpoint
-@app.route('/temperature', methods=['GET'])
+@app.get("/temperature")
 def temperature():
     temp = get_temperature_reading()
     if temp < 10:
@@ -27,7 +33,7 @@ def temperature():
 
 
 # Metrics endpoint
-@app.route('/metrics', methods=['GET'])
+@app.get("/metrics")
 def metrics():
     return Response(generate_latest(), mimetype="text/plain")
 
