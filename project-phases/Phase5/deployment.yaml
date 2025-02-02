@@ -1,0 +1,22 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: sensebox-deployment
+spec:
+  replicas: 2
+  selector:
+    matchLabels:
+      app: sensebox
+  template:
+    metadata:
+      labels:
+        app: sensebox
+    spec:
+      containers:
+        - name: sensebox
+          image: your-image-repo/sensebox
+          ports:
+            - containerPort: 5000
+          env:
+            - name: SENSEBOX_ID
+              value: "your-sensebox-id"

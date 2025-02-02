@@ -13,7 +13,8 @@
     1. Create a Project Directory:
        # mkdir Phase5
        # cd Phase5  
-    2. Install Docker & Kind & Kubectl & Redis & Minio
+    2. Install Docker, Kind, Kubectl, Redis, Minio, flask & promethus_client & kustomize
+       # pip install docker kind kubectl flask redis minio prometheus_client kustomize
 
 ### Step 2 : Create KIND Cluster
        # kind create cluster --config clustername.yaml
@@ -21,6 +22,11 @@
 ### Step 3 : Prepare Deployment and Service files
     1. Create Deployment File ( Deployment.yaml )
     2. Create Service File ( Service.yaml )
+
+
+### Step 4 : Managing Deployment and Service files using Kustomize
+       # kustomize init
+       # kustomize build | kubectl apply -f -
 
 ### Step 4 : Apply Deployment and Service
     1. Apply Deployment and Service files
