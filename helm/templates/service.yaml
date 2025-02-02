@@ -1,0 +1,12 @@
+# service.yaml
+apiVersion: v1
+kind: Service
+metadata:
+  name: hivebox-scalable-restful-api-for-beekeepers
+spec:
+  selector:
+    app: hivebox-scalable-restful-api-for-beekeepers
+  ports:
+    - protocol: TCP
+      port: 80
+      targetPort: 80

@@ -1,0 +1,3 @@
+apiVersion: v2
+name: hivebox-scalable-restful-api-for-beekeepers
+version: 0.1.0
