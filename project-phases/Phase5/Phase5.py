@@ -1,12 +1,12 @@
 import os
 from flask import Flask, jsonify, Response
 from prometheus_client import start_http_server, Gauge, generate_latest
-import redis
-from minio import Minio
-from datetime import datetime
-from prometheus_client import start_http_server, Counter
-import time
-import threading
+#import redis
+#from minio import Minio
+#from datetime import datetime
+#from prometheus_client import start_http_server, Counter
+# import time
+# import threading
 
 app = Flask(__name__)
 version = " v0.0.1 "
