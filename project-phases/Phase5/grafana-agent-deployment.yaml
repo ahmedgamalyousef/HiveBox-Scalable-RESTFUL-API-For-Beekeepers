@@ -1,0 +1,32 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: grafana-agent
+  namespace: default
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: grafana-agent
+  template:
+    metadata:
+      labels:
+        app: grafana-agent
+    spec:
+      containers:
+        - name: grafana-agent
+          image: grafana/agent:v0.15.0
+          args:
+            - --config.file=/etc/agent/agent.yaml
+          volumeMounts:
+            - name: config-volume
+              mountPath: /etc/agent
+            - name: varlog
+              mountPath: /var/log
+      volumes:
+        - name: config-volume
+          configMap:
+            name: grafana-agent-config
+        - name: varlog
+          hostPath:
+            path: /var/log

@@ -61,9 +61,9 @@ jobs:
         kubectl apply -f deployment.yaml
         kubectl apply -f service.yaml
 
-    - name: Wait for Deployment
-      run: |
-        kubectl wait --for=condition=available --timeout=300s deployment/hivebox-scalable-restful-api-for-beekeepers
+    # - name: Wait for Deployment
+    #   run: |
+    #     kubectl wait --for=condition=available --timeout=300s deployment/hivebox-scalable-restful-api-for-beekeepers
 
     - name: Run Venom Tests
       run: venom run venom_test.yaml
