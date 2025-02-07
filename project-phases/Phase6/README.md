@@ -30,7 +30,7 @@
        # kubectl apply -f application.yaml
 
 ### 2- Prepare for Production by Setting Up DNS (ExternalDNS) and Certificates (Cert-Manager)
-ExternalDNS manages DNS records for your Kubernetes cluster . Cert-Manager automates the creation and management of certificates .
+    ExternalDNS manages DNS records for your Kubernetes cluster . Cert-Manager automates the creation and management of certificates .
     
     1. Install ExternalDNS & Deploy ExternalDNS-deployment.yaml File:
        # kubectl create namespace externaldns
