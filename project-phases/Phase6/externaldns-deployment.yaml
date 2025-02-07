@@ -1,0 +1,22 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: externaldns
+  namespace: externaldns
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: externaldns
+  template:
+    metadata:
+      labels:
+        app: externaldns
+    spec:
+      containers:
+        - name: externaldns
+          image: registry.k8s.io/external-dns/external-dns:v0.10.1
+          args:
+            - --source=service
+            - --domain-filter=yourdomain.com
+            - --provider=aws

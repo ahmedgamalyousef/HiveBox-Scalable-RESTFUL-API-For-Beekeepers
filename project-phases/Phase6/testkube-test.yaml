@@ -1,0 +1,40 @@
+apiVersion: tests.testkube.io/v1
+kind: Test
+metadata:
+  name: hivebox-endpoint-test
+spec:
+  type: "postman/collection"
+  content:
+    type: "string"
+    data: |
+      {
+        "info": {
+          "name": "HiveBox Endpoint Test",
+          "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+        },
+        "item": [
+          {
+            "name": "Store Endpoint Test",
+            "request": {
+              "method": "POST",
+              "header": [],
+              "body": {
+                "mode": "raw",
+                "raw": "{}"
+              },
+              "url": {
+                "raw": "http://localhost:5000/store",
+                "protocol": "http",
+                "host": [
+                  "localhost"
+                ],
+                "port": "5000",
+                "path": [
+                  "store"
+                ]
+              }
+            },
+            "response": []
+          }
+        ]
+      }

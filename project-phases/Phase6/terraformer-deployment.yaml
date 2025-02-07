@@ -1,0 +1,19 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: terraformer
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: terraformer
+  template:
+    metadata:
+      labels:
+        app: terraformer
+    spec:
+      containers:
+        - name: terraformer
+          image: terraformer/terraformer:latest
+          ports:
+            - containerPort: 80
