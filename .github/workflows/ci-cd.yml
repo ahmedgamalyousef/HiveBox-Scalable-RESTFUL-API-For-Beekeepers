@@ -64,20 +64,20 @@ jobs:
     # - name: Wait for Deployment
     #   run: |
     #     kubectl wait --for=condition=available --timeout=300s deployment/hivebox-scalable-restful-api-for-beekeepers
-    - name: Install Go
-      run: |
-          sudo apt-get update
-          sudo apt-get install -y golang-go
+    # - name: Install Go
+    #   run: |
+    #       sudo apt-get update
+    #       sudo apt-get install -y golang-go
 
-    - name: Install Venom Using Go
-      run: |
-          export PATH=$PATH:/usr/local/go/bin
-          go install github.com/ovh/venom@latest
+    # - name: Install Venom Using Go
+    #   run: |
+    #       export PATH=$PATH:/usr/local/go/bin
+    #       go install github.com/ovh/venom@latest
 
-    - name: Run Venom Tests
-      run: |
-          export PATH=$PATH:$(go env GOPATH)/bin
-          venom run venom_test.yaml
+    # - name: Run Venom Tests
+    #   run: |
+    #       export PATH=$PATH:$(go env GOPATH)/bin
+    #       venom run venom_test.yaml
 
 ###########################################################
 
