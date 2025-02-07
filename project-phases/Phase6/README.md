@@ -10,7 +10,7 @@
 
 ## Requirements in this Phase : 
 
-### 1-Deploy the Application in Declarative GitOps Style using Argo CD
+### 1- Deploy the Application in Declarative GitOps Style using Argo CD
 
     1. Install Argo CD :
        # kubectl create namespace argocd
@@ -29,8 +29,8 @@
     5. Apply the Argo CD Application :
        # kubectl apply -f application.yaml
 
-### 2-Prepare for Production by Setting Up DNS (ExternalDNS) and Certificates (Cert-Manager)
-      - ExternalDNS manages DNS records for your Kubernetes cluster . Cert-Manager automates the creation and management of certificates .
+### 2- Prepare for Production by Setting Up DNS (ExternalDNS) and Certificates (Cert-Manager)
+ExternalDNS manages DNS records for your Kubernetes cluster . Cert-Manager automates the creation and management of certificates .
     
     1. Install ExternalDNS & Deploy ExternalDNS-deployment.yaml File:
        # kubectl create namespace externaldns
@@ -41,11 +41,11 @@
        # kubectl apply -f https://github.com/jetstack/cert-manager/releases/download/v1.6.1/cert-manager.yaml
        # kubectl apply -f clusterissuer.yaml
 
-### 3-Automate Dependancy Updates with Dependabot
+### 3- Automate Dependancy Updates with Dependabot
       - Dependabot automatically checks for and updates dependencies in your project 
       - Create Dependabot Configuration File (Create a .github/dependabot.yaml file in your Repository)
 
-### 4-Move All External Services to Kubernetes Cluster Using Open-Source Solutions
+### 4- Move All External Services to Kubernetes Cluster Using Open-Source Solutions
     1. Grafana :
        - Create a deployment for Grafana (grafana-deployment.yaml)
        - Create a service for Grafana (grafana-service.yaml)
@@ -65,7 +65,7 @@
        - Apply the Terraformer manifests :
          # kubectl apply -f terraformer-deployment.yaml
 
-### 5-Extra Suggestions
+### 5- Extra Suggestions
     1. Setup Kyverno for Policy as Code
        - Kyverno is a Kubernetes native policy management tool .
        - Install Kyverno :
