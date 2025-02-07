@@ -13,8 +13,8 @@
     1. Create a Project Directory:
        # mkdir Phase5
        # cd Phase5  
-    2. Install Docker, Kind, Kubectl, Redis, Minio, flask & promethus_client & kustomize
-       # pip install docker kind kubectl flask redis minio prometheus_client kustomize
+    2. Install Docker, Kind, Kubectl, Redis, Minio, flask & promethus_client & kustomize & Venom
+       # pip install docker kind kubectl flask redis minio prometheus_client kustomize Venom
 
 ### Step 2 : Create KIND Cluster
        # kind create cluster --config clustername.yaml

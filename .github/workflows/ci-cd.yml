@@ -40,6 +40,33 @@ jobs:
 
     - name: Build Docker image
       run: docker build -t ahmedgamalyousef/hivebox2:latest .
+    
+    - name: Checkout code
+      uses: actions/checkout@v2
+
+    - name: Set up Docker
+      uses: docker/setup-buildx-action@v1
+
+    - name: Install KIND
+      run: |
+        curl -Lo ./kind https://kind.sigs.k8s.io/dl/v0.11.1/kind-linux-amd64
+        chmod +x ./kind
+        sudo mv ./kind /usr/local/bin/kind
+
+    - name: Create KIND cluster
+      run: kind create cluster --config kind-config.yaml
+
+    - name: Deploy Application
+      run: |
+        kubectl apply -f deployment.yaml
+        kubectl apply -f service.yaml
+
+    - name: Wait for Deployment
+      run: |
+        kubectl wait --for=condition=available --timeout=300s deployment/hivebox-deployment
+
+    - name: Run Venom Tests
+      run: venom run venom_test.yaml
 
 ###########################################################
 

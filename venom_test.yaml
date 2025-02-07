@@ -1,0 +1,9 @@
+test_suites:
+  - name: StoreDataTest
+    steps:
+      - type: http
+        method: POST
+        url: http://localhost:5000/store
+        body: {}
+        assertions:
+          - result.code ShouldEqual 200
