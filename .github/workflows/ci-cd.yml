@@ -64,6 +64,11 @@ jobs:
     # - name: Wait for Deployment
     #   run: |
     #     kubectl wait --for=condition=available --timeout=300s deployment/hivebox-scalable-restful-api-for-beekeepers
+    - name: Install Venom
+      run: |
+        curl -LO https://github.com/ovh/venom/releases/download/v1.0.0/venom-linux-amd64
+        chmod +x venom-linux-amd64
+        sudo mv venom-linux-amd64 /usr/local/bin/venom
 
     - name: Run Venom Tests
       run: venom run venom_test.yaml
