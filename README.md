@@ -8,36 +8,36 @@ As a DevOps Engineer, I successfully led the HiveBox project, which involved bui
 
 ## Project Phases 
 
-### Phase 1 : Welcome to the DevOps World 
+### [Phase 1 : Welcome to the DevOps World](https://github.com/JemyYousef/HiveBox-Scalable-RESTFUL-API-For-Beekeepers/tree/main/project-phases/Phase1)
     • Understand Your Role: Learn about your role in the project and how you'll collaborate with other teams .
     • Agile Methodology: Brush up on agile project management and decide which Agile methodology you'll use (e.g., Scrum, Kanban) .
     • Documentation: Document your progress and decisions as you go .
-### Phase 2 : Basics - DevOps Core
+### [Phase 2 : Basics - DevOps Core](https://github.com/JemyYousef/HiveBox-Scalable-RESTFUL-API-For-Beekeepers/tree/main/project-phases/Phase2)
     • Python Fundamentals: Learn Python basics .
     • Development Tools: Familiarize yourself with common development tools .
     • Git Basics: Get comfortable with Git for version control .
     • Linux Essentials: Gain essential Linux skills and learn common tools .
     • Bash Scripting: Practice writing bash scripts .
     • Docker Fundamentals: Understand the basics of Docker .
-### Phase 3 : Start - Laying the Foundation
+### [Phase 3 : Start - Laying the Foundation](https://github.com/JemyYousef/HiveBox-Scalable-RESTFUL-API-For-Beekeepers/tree/main/project-phases/Phase3)
     • Define Goals: Clearly define your project goals .
     • Prioritize Requirements: Prioritize the requirements for your project .
     • Modularity: Focus on code modularity .
     • Testing: Implement unit tests and follow Docker best practices .
     • Continuous Integration: Explore quality gates in continuous integration with GitHub Actions .
-### Phase 4 : Expand - Constructing a Shell
+### [Phase 4 : Expand - Constructing a Shell](https://github.com/JemyYousef/HiveBox-Scalable-RESTFUL-API-For-Beekeepers/tree/main/project-phases/Phase4)
     • Planning: Review and refine your planning .
     • REST API Best Practices: Apply REST API best practices .
     • Kubernetes: Embrace Kubernetes for container orchestration .
     • Observability: Dive into observability .
     • Continuous Delivery: Explore continuous delivery solutions .
     • Cloud Computing: Get an overview of cloud computing .
-### Phase 5 : Transform - Finishing the Structure
+### [Phase 5 : Transform - Finishing the Structure](https://github.com/JemyYousef/HiveBox-Scalable-RESTFUL-API-For-Beekeepers/tree/main/project-phases/Phase5)
     • Integration: Integrate your code with external systems .
     • Integration Tests: Write integration tests .
     • Infrastructure as Code: Learn Terraform essentials and Kubernetes configuration management (Helm) .
     • Continuous Delivery Best Practices: Implement CD best practices .
-### Phase 6 : Optimize - Keep Improving
+### [Phase 6 : Optimize - Keep Improving](https://github.com/JemyYousef/HiveBox-Scalable-RESTFUL-API-For-Beekeepers/tree/main/project-phases/Phase6)
     • Deploy the Application in Declarative GitOps Style Using Argo CD .
     • Prepare for Production by Setting Up DNS (ExternalDNS) and Certificates (Cert-Manager) .
     • Automate Dependency Updates with Dependabot .
