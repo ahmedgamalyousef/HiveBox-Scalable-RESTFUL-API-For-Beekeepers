@@ -60,12 +60,16 @@ Each phase builds on the previous one, gradually covering all aspects of the Dev
        # pip install -r requirements.txt
 ### Step 3 : Running Your Application
     1. # python app.py
+    2. Open Your Terminal to run the Minio Server using the following Command :
+       # docker run -p 9000:9000 -p 9001:9001   --name minio   -e "MINIO_ROOT_USER=minioadmin"   -e "MINIO_ROOT_PASSWORD=minioadmin"   -v /media/jemy/Data/Linux\ Adminstration/Github\ Projects/saraya-project/miniodata/   minio/minio server /data
     2. Access Your Application : Open Your Browser
       - http://127.0.0.1:5000/version to see the version endpoint .
       - http://127.0.0.1:5000/temperature to see the temperature endpoint .
       - http://127.0.0.1:5000/metrics to returns default Prometheus metrics about the app .
       - http://127.0.0.1:5000/readyz to return HTTP 200 unless 50% + 1 of the configured senseBoxes are not accessible and caching content is older than 5 min .
-      - http://127.0.0.1:5000/store to make the application store the data every 5 minutes, but by calling this endpoint, it should store the data directly on MinIO .      
+      - http://127.0.0.1:5000/store to make the application store the data every 5 minutes, but by calling this endpoint, it should store the data directly on MinIO .
+      - http://172.17.0.2:40047/login to open Minio WebUI, create abucket and its name as written in code (mybucket) and show your stored Data ( Usename: minioadmin & Password: minioadmin ) .
+     
 ### Step 4 : Dockerizing the Application
     1. # docker build -t your-dockerhub-username/hiveBox-scalable-restful-api-for-beekeepers:latest .
     2. # docker run -p 5000:5000 your-dockerhub-username/hiveBox-scalable-restful-api-for-beekeepers:latest
@@ -74,3 +78,5 @@ Each phase builds on the previous one, gradually covering all aspects of the Dev
        # docker login
     2. Push the Docker Image to Docker Hub:
        # docker push your-dockerhub-username/hiveBox-scalable-restful-api-for-beekeepers:latest
+
+## Project EndPoints Outputs
