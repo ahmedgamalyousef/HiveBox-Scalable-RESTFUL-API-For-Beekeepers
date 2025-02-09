@@ -9,7 +9,7 @@ alias deactivate 'test $?_OLD_VIRTUAL_PATH != 0 && setenv PATH "$_OLD_VIRTUAL_PA
 # Unset irrelevant variables.
 deactivate nondestructive
 
-setenv VIRTUAL_ENV '/media/jemy/Data/Linux Adminstration/Github Projects/saraya-project/jemy/HiveBox-Scalable-RESTFUL-API-For-Beekeepers/env'
+setenv VIRTUAL_ENV '/media/jemy/Data/Linux Adminstration/Github Projects/Project 1/HiveBox-Scalable-RESTFUL-API-For-Beekeepers/env'
 
 set _OLD_VIRTUAL_PATH="$PATH"
 setenv PATH "$VIRTUAL_ENV/"bin":$PATH"

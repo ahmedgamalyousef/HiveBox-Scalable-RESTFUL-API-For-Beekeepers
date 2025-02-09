@@ -1,5 +1,5 @@
 #!/bin/sh
-'''exec' "/media/jemy/Data/Linux Adminstration/Github Projects/saraya-project/jemy/HiveBox-Scalable-RESTFUL-API-For-Beekeepers/env/bin/python3" "$0" "$@"
+'''exec' "/media/jemy/Data/Linux Adminstration/Github Projects/Project 1/HiveBox-Scalable-RESTFUL-API-For-Beekeepers/env/bin/python3" "$0" "$@"
 ' '''
 # -*- coding: utf-8 -*-
 import re

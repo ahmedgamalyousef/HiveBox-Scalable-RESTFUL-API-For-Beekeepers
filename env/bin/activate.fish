@@ -33,7 +33,7 @@ end
 # Unset irrelevant variables.
 deactivate nondestructive
 
-set -gx VIRTUAL_ENV '/media/jemy/Data/Linux Adminstration/Github Projects/saraya-project/jemy/HiveBox-Scalable-RESTFUL-API-For-Beekeepers/env'
+set -gx VIRTUAL_ENV '/media/jemy/Data/Linux Adminstration/Github Projects/Project 1/HiveBox-Scalable-RESTFUL-API-For-Beekeepers/env'
 
 set -gx _OLD_VIRTUAL_PATH $PATH
 set -gx PATH "$VIRTUAL_ENV/"bin $PATH
