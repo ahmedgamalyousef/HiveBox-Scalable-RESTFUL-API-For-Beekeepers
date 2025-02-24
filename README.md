@@ -7,7 +7,7 @@
 As a DevOps Engineer, I successfully led the HiveBox project, which involved building a scalable RESTFUL API around openSenseMap to assist Beekeepers with their chores . This project was part of the Dynamic DevOps Roadmap and covered various phases of the DevOps lifecycle .
 
 ## Prerequisites 
-    • [Docker][https://docs.docker.com/engine/install/] 
+    • [Docker](https://docs.docker.com/engine/install/)
     •
     •
     •
