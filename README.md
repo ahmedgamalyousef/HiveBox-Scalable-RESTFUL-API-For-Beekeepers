@@ -10,7 +10,6 @@ As a DevOps Engineer, I successfully led the HiveBox project, which involved bui
 Before you begin, ensure you have met the following requirements :
 
 - **Python** : Programming Language
-- **AWS CLI** : Configured with appropriate permissions
 - **Docker** : Installed and configured
 - **kubectl** : Installed and configured to interact with your Kubernetes cluster
 - **kind** : Installed and configured to run local Kubernetes clusters using Docker containers as nodes
