@@ -7,12 +7,15 @@
 As a DevOps Engineer, I successfully led the HiveBox project, which involved building a scalable RESTFUL API around openSenseMap to assist Beekeepers with their chores . This project was part of the Dynamic DevOps Roadmap and covered various phases of the DevOps lifecycle .
 
 ## Prerequisites 
-• [Docker](https://docs.docker.com/engine/install/) installed and configured
-• [Kubectl](https://kubernetes.io/docs/tasks/tools/) installed and configured to interact with your kubernetes cluster
-•
-•
-•
-•
+Before you begin, ensure you have met the following requirements:
+
+- **Python**
+- **AWS CLI**: Configured with appropriate permissions
+- **Docker**: Installed and configured
+- **kubectl**: Installed and configured to interact with your Kubernetes cluster
+- **Terraform**
+- **Helm**
+- **GitHub CLI**
 
 ## Project Phases 
 
