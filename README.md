@@ -9,19 +9,19 @@ As a DevOps Engineer, I successfully led the HiveBox project, which involved bui
 ## Prerequisites 
 Before you begin, ensure you have met the following requirements :
 
-- **Python**: Programming Language
-- **AWS CLI**: Configured with appropriate permissions
-- **Docker**: Installed and configured
-- **kubectl**: Installed and configured to interact with your Kubernetes cluster
-- **kind**: Installed and configured to run local Kubernetes clusters using Docker containers as nodes
-- **Terraform**: open-source Infrastructure as Code (IaC) tool
-- **Helm**: simplifies the deployment and management of applications on Kubernetes clusters
-- **GitHub CLI**: For interacting with GitHub repositories and workflows directly from the command line
-- **Redis**: For database caching and real-time analytics
-- **MinIO**: For handling data storage
-- **Nginx**: high-performance HTTP server
-- **Kustomize**: For customizing Kubernetes objects through a kustomization file
-- **Grafana**: For collecting logs and metrics
+- **Python** : Programming Language
+- **AWS CLI** : Configured with appropriate permissions
+- **Docker** : Installed and configured
+- **kubectl** : Installed and configured to interact with your Kubernetes cluster
+- **kind** : Installed and configured to run local Kubernetes clusters using Docker containers as nodes
+- **Terraform** : open-source Infrastructure as Code (IaC) tool
+- **Helm** : simplifies the deployment and management of applications on Kubernetes clusters
+- **GitHub CLI** : For interacting with GitHub repositories and workflows directly from the command line
+- **Redis** : For database caching and real-time analytics
+- **MinIO** : For handling data storage
+- **Nginx** : high-performance HTTP server
+- **Kustomize** : For customizing Kubernetes objects through a kustomization file
+- **Grafana** : For collecting logs and metrics
 ## Project Phases 
 
 ### [Phase 1 : Welcome to the DevOps World](https://github.com/JemyYousef/HiveBox-Scalable-RESTFUL-API-For-Beekeepers/tree/main/project-phases/Phase1)
