@@ -21,6 +21,8 @@ Before you begin, ensure you have met the following requirements :
 - **Nginx** : high-performance HTTP server
 - **Kustomize** : For customizing Kubernetes objects through a kustomization file
 - **Grafana** : For collecting logs and metrics
+- **Kyverno** : For managing, validating and generating configurations for Kubernetes resources
+- **TestKube** : For testing orchestration and execution framework designed for cloud-native applications
 ## Project Phases 
 
 ### [Phase 1 : Welcome to the DevOps World](https://github.com/JemyYousef/HiveBox-Scalable-RESTFUL-API-For-Beekeepers/tree/main/project-phases/Phase1)
