@@ -8,7 +8,7 @@ As a DevOps Engineer, I successfully led the HiveBox project, which involved bui
 
 ## Prerequisites 
 • [Docker](https://docs.docker.com/engine/install/) installed and configured
-•
+• [Kubectl](https://kubernetes.io/docs/tasks/tools/) installed and configured to interact with your kubernetes cluster
 •
 •
 •
